@@ -1,0 +1,47 @@
+import java.util.Date;
+
+public class Passageiro {
+
+	private String nome;
+	private String telef;
+	private String email;
+	private String cpf;
+	private Date dataNasc;
+
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getTelef() {
+		return telef;
+	}
+	public void setTelef(String telef) {
+		this.telef = telef;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		//TODO realizar validacao
+		this.email = email;
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+	public void setCpf(String cpf) {
+		//TODO realizar validacao
+		this.cpf = cpf;
+	}
+
+	public Date getDataNasc() {
+		return dataNasc;
+	}
+	public void setDataNasc(String dataNasc) {
+		this.dataNasc = dataNasc;
+	}
+}
