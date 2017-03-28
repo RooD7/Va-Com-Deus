@@ -1,3 +1,5 @@
+//package mainPackage;
+
 import java.util.Date;
 
 public class Passageiro {
@@ -7,6 +9,14 @@ public class Passageiro {
 	private String email;
 	private String cpf;
 	private Date dataNasc;
+
+	public Passageiro() {
+		nome = "";
+		telef = "";
+		email = "";
+		cpf = "";
+		dataNasc = null;
+	}
 
 	public String getNome() {
 		return nome;
@@ -41,7 +51,7 @@ public class Passageiro {
 	public Date getDataNasc() {
 		return dataNasc;
 	}
-	public void setDataNasc(String dataNasc) {
+	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
 }

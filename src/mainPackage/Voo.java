@@ -1,3 +1,5 @@
+//package mainPackage;
+
 import java.util.Date;
 
 public class Voo {
@@ -12,6 +14,17 @@ public class Voo {
 	private String destino;
 	private String origem;
 
+	public Voo(Aviao aviao) {
+		infoVoo = "";
+		numVoo = 0;
+		compAerea = "";
+		aviao = new Aviao();
+		data = null;
+		horarioVoo = null;
+		statusVoo = "";
+		destino = "";
+		origem = "";
+	}
 
 	public String getInfoVoo() {
 		return infoVoo;

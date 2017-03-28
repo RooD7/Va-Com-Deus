@@ -1,12 +1,24 @@
+//package mainPackage;
+
 public class Aviao {
 
 	private Double autonomiaVoo;
 	private Double altura;
 	private Double enverAsa;
-	private Double comprAsa;
+	private Double comprimento;
 	private Double capacCarga;
 	private Passageiro[] listaPsg;
 	private int qntdePsg;
+
+	public Aviao() {
+		autonomiaVoo = 0.0;
+		altura = 0.0;
+		enverAsa = 0.0;
+		comprimento = 0.0;
+		capacCarga = 0.0;
+		listaPsg = null;
+		qntdePsg = 0;
+	}
 
 	public Double getAutonomiaVoo() {
 		return autonomiaVoo;
@@ -29,11 +41,11 @@ public class Aviao {
 		this.enverAsa = enverAsa;
 	}
 
-	public Double getComprAsa() {
-		return comprAsa;
+	public Double getComprimento() {
+		return comprimento;
 	}
-	public void setComprAsa(Double comprAsa) {
-		this.comprAsa = comprAsa;
+	public void setComprimento(Double comprimento) {
+		this.comprimento = comprimento;
 	}
 
 	public Double getCapacCarga() {
