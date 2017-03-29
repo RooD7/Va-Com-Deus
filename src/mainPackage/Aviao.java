@@ -2,6 +2,7 @@
 
 public class Aviao {
 
+	private String modelo;
 	private Double autonomiaVoo;
 	private Double altura;
 	private Double enverAsa;
@@ -11,6 +12,7 @@ public class Aviao {
 	private int qntdePsg;
 
 	public Aviao() {
+		modelo = "";
 		autonomiaVoo = 0.0;
 		altura = 0.0;
 		enverAsa = 0.0;
@@ -18,6 +20,13 @@ public class Aviao {
 		capacCarga = 0.0;
 		listaPsg = null;
 		qntdePsg = 0;
+	}
+
+	public String getModelo() {
+		return modelo;
+	}
+	public void setModelo(String modelo) {
+		this.modelo = modelo;
 	}
 
 	public Double getAutonomiaVoo() {
