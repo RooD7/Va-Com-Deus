@@ -18,7 +18,8 @@ public class Voo {
 		infoVoo = "";
 		numVoo = 0;
 		compAerea = "";
-		aviao = new Aviao();
+		//TODO construtor sendo chamado 2 vezes
+		//aviao = new Aviao();
 		data = null;
 		horarioVoo = null;
 		statusVoo = "";

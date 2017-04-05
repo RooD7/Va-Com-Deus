@@ -1,5 +1,5 @@
 //package mainPackage;
-//Vinicius 
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -7,8 +7,9 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
+		Companhia cmpAer = new Companhia("TAM");
 		Aviao aviao = new Aviao();
-		Voo voo = new Voo(aviao);
+		//Voo voo = new Voo(aviao);
 		Passageiro passageiro = new Passageiro();
 		
 		Passageiro[] listaPsg;
@@ -42,20 +43,11 @@ public class Main {
 						"Quantidade Psg: "+aviao.getQntdePsg()+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
-		// Voo 01
-		voo.setInfoVoo("incluido");
-		voo.setNumVoo(01);
-		voo.setCompAerea("TAM");
-		voo.setAviao(aviao);
-		voo.setData(data);
 		
 		horarioVoo = formHora.parse("12:30");
-		voo.setHorarioVoo(horarioVoo);
-
-		voo.setStatusVoo("Confirmado");
-		voo.setDestino("Dubai");
-		voo.setOrigem("Belo Horizonte");
-
+		cmpAer.cadastrarVoo("incluido", 1, "TAM", aviao, data, horarioVoo, "Confirmado", "Dubai", "Belo Horizonte");
+		cmpAer.exportarVoo();
+		/*
 		System.out.print("Voo\n"+
 						"Info Voo: "+voo.getInfoVoo()+"\n"+
 						"Numero Voo: "+voo.getNumVoo()+"\n"+
@@ -66,7 +58,7 @@ public class Main {
 						"Status Voo: "+voo.getStatusVoo()+"\n"+
 						"Destino: "+voo.getDestino()+"\n"+
 						"Origem: "+voo.getOrigem()+"\n");
-
+		*/
 		System.out.print("\n\n----------\t----------\t----------\n\n");
 		//Passageiro
 		passageiro.setNome("João Lucas");
@@ -84,5 +76,8 @@ public class Main {
 						"Data Nascimento: "+formData.format(passageiro.getDataNasc())+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
+
+		//ArquivoJson js = new ArquivoJson();
+		//js.json();	
 	}
 }
