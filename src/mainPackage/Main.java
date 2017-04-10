@@ -1,15 +1,23 @@
-//package mainPackage;
-
+//Vinicius
 import java.util.Date;
 import java.text.SimpleDateFormat;
+
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Main {
 
 	public static void main(String[] args) throws Exception {
 
-		Companhia cmpAer = new Companhia("TAM");
 		Aviao aviao = new Aviao();
-		//Voo voo = new Voo(aviao);
+		Voo voo = new Voo(aviao);
 		Passageiro passageiro = new Passageiro();
 		
 		Passageiro[] listaPsg;
@@ -21,16 +29,42 @@ public class Main {
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 
-		System.out.print("\n\n----------\t----------\t----------\n\n");
+		JSONObject jsonObject;
+		//Cria o parse de tratamento
+		JSONParser parser = new JSONParser();
+		//Variaveis que irao armazenar os dados do arquivo JSON
 		// Boeing 747
-		aviao.setModelo("Boeing 747");
-		aviao.setAutonomiaVoo(13450.0);
-		aviao.setAltura(19.33);
-		aviao.setEnverAsa(68.4);
-		aviao.setComprimento(76.3);
-		aviao.setCapacCarga(447700.0);
-		aviao.setListaPsg(null);
-		aviao.setQntdePsg(660);
+
+		//String modelo;
+
+		try {
+			//Salva no objeto JSONObject o que o parse tratou do arquivo
+			jsonObject = (JSONObject) parser.parse(new FileReader(
+					"entrada-aviao.json"));
+
+			//Salva nas variaveis os dados retirados do arquivo
+
+			aviao.setModelo((String) jsonObject.get("Modelo"));
+			aviao.setAutonomiaVoo((Double) jsonObject.get("Autonomia"));
+			aviao.setAltura((Double) jsonObject.get("Altura"));
+			aviao.setEnverAsa((Double) jsonObject.get("Envergadura da asa"));
+			aviao.setComprimento((Double) jsonObject.get("Comprimento"));
+			aviao.setCapacCarga((Double) jsonObject.get("Capacidade carga"));
+			aviao.setListaPsg((Passageiro[]) jsonObject.get("Lista Psg"));
+			aviao.setQntdePsg((Integer) jsonObject.get("Quantidade Psg"));
+
+
+			System.out.printf("Passou!");
+		}
+		//Trata as exceptions que podem ser lançadas no decorrer do processo
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		System.out.print("Avião\n"+
 						"Modelo: "+aviao.getModelo()+"\n"+
@@ -43,11 +77,20 @@ public class Main {
 						"Quantidade Psg: "+aviao.getQntdePsg()+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
+		// Voo 01
+		voo.setInfoVoo("incluido");
+		voo.setNumVoo(01);
+		voo.setCompAerea("TAM");
+		voo.setAviao(aviao);
+		voo.setData(data);
 		
 		horarioVoo = formHora.parse("12:30");
-		cmpAer.cadastrarVoo("incluido", 1, "TAM", aviao, data, horarioVoo, "Confirmado", "Dubai", "Belo Horizonte");
-		cmpAer.exportarVoo();
-		/*
+		voo.setHorarioVoo(horarioVoo);
+
+		voo.setStatusVoo("Confirmado");
+		voo.setDestino("Dubai");
+		voo.setOrigem("Belo Horizonte");
+
 		System.out.print("Voo\n"+
 						"Info Voo: "+voo.getInfoVoo()+"\n"+
 						"Numero Voo: "+voo.getNumVoo()+"\n"+
@@ -58,7 +101,7 @@ public class Main {
 						"Status Voo: "+voo.getStatusVoo()+"\n"+
 						"Destino: "+voo.getDestino()+"\n"+
 						"Origem: "+voo.getOrigem()+"\n");
-		*/
+
 		System.out.print("\n\n----------\t----------\t----------\n\n");
 		//Passageiro
 		passageiro.setNome("João Lucas");
@@ -76,8 +119,5 @@ public class Main {
 						"Data Nascimento: "+formData.format(passageiro.getDataNasc())+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
-
-		//ArquivoJson js = new ArquivoJson();
-		//js.json();	
 	}
 }
