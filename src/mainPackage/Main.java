@@ -35,7 +35,6 @@ public class Main {
 		//Variaveis que irao armazenar os dados do arquivo JSON
 		// Boeing 747
 
-		//String modelo;
 
 		try {
 			//Salva no objeto JSONObject o que o parse tratou do arquivo
@@ -44,14 +43,15 @@ public class Main {
 
 			//Salva nas variaveis os dados retirados do arquivo
 
+
 			aviao.setModelo((String) jsonObject.get("Modelo"));
-			aviao.setAutonomiaVoo((Double) jsonObject.get("Autonomia"));
-			aviao.setAltura((Double) jsonObject.get("Altura"));
-			aviao.setEnverAsa((Double) jsonObject.get("Envergadura da asa"));
-			aviao.setComprimento((Double) jsonObject.get("Comprimento"));
-			aviao.setCapacCarga((Double) jsonObject.get("Capacidade carga"));
+			aviao.setAutonomiaVoo(Double.parseDouble((String) jsonObject.get("Autonomia")));
+			aviao.setAltura(Double.parseDouble((String) jsonObject.get("Altura")));
+			aviao.setEnverAsa(Double.parseDouble((String) jsonObject.get("Envergadura da asa")));
+			aviao.setComprimento(Double.parseDouble((String) jsonObject.get("Comprimento")));
+			aviao.setCapacCarga(Double.parseDouble((String) jsonObject.get("Capacidade carga")));
 			aviao.setListaPsg((Passageiro[]) jsonObject.get("Lista Psg"));
-			aviao.setQntdePsg((Integer) jsonObject.get("Quantidade Psg"));
+			aviao.setQntdePsg(Integer.parseInt((String) jsonObject.get("Quantidade Psg")));
 
 
 			System.out.printf("Passou!");
