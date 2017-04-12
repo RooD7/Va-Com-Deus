@@ -1,6 +1,6 @@
  public class Aeroporto {
 
- 	private Companhia[] listComp = new Companhia(1000);
+ 	private Companhia[] listComp = new Companhia[1000];
  	private int tamListComp;
 
 
@@ -9,15 +9,15 @@
 		
 		// Adiciona o novo voo a lista de voo's
 		// Encontra uma posicao vazia na Lista de Voo's
-		for (int i = 0; i < this.listVoo.length; i++) {
-			if (this.listVoo[i] == null) {
+		for (int i = 0; i < this.listComp.length; i++) {
+			if (this.listComp[i] == null) {
 
 				// Cria uma nova Companhia
 				this.listComp[i] = new Companhia();
 				//Adiciona os dados da Companhia na lista
 				this.listComp[i].setNome(nome);
-				this.listComp[i].setListaVoo(listaVoo);
-				this.listComp[i].setQntdeVoo(qntdeVoo);
+				this.listComp[i].setListVoo(listVoo);
+				this.listComp[i].setQntdeVoo(tamListVoo);
 
 				//Atualiza o tamanho da lista
 				this.tamListComp = i;

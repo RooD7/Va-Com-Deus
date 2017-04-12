@@ -52,4 +52,5 @@ public class Passageiro {
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
 	}
+
 }

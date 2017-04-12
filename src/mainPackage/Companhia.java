@@ -6,9 +6,23 @@ public class Companhia {
 	private String nome;
 	private Voo[] listVoo = new Voo[1000];
 	private int tamListVoo = 0;
+	private int qntdeVoo;
+/*
+	public Companhia(String nome,Voo[] listVoo,int tamListVoo,int qntdeVoo) {
+		this.nome = nome;
+		this.listVoo = listVoo;
+		this.tamListVoo = tamListVoo;
+		this.qntdeVoo = qntdeVoo;
+	}
+*/
 
-	public Companhia(String nome) {
-		setNome(nome);
+	public Companhia(){
+
+		this.nome = "";
+		this.listVoo = null;
+		this.tamListVoo = 0;
+		this.qntdeVoo = 0;
+
 	}
 
 	public String getNome() {
@@ -85,5 +99,9 @@ public class Companhia {
 						"Destino: "+listVoo[i].getDestino()+"\n"+
 						"Origem: "+listVoo[i].getOrigem()+"\n");	
 		}
+	}
+
+	public void setQntdeVoo(int qntdeVoo) {
+		this.qntdeVoo = qntdeVoo;
 	}
 }

@@ -8,11 +8,12 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
-/*
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-*/
+
+import javax.swing.*;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -30,7 +31,6 @@ public class Main {
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 
-		/*
 		JSONObject jsonObject;
 		//Cria o parse de tratamento
 		JSONParser parser = new JSONParser();
@@ -52,11 +52,11 @@ public class Main {
 			aviao.setEnverAsa(Double.parseDouble((String) jsonObject.get("Envergadura da asa")));
 			aviao.setComprimento(Double.parseDouble((String) jsonObject.get("Comprimento")));
 			aviao.setCapacCarga(Double.parseDouble((String) jsonObject.get("Capacidade carga")));
-			aviao.setListaPsg((Passageiro[]) jsonObject.get("Lista Psg"));
-			aviao.setQntdePsg(Integer.parseInt((String) jsonObject.get("Quantidade Psg")));
+			voo.setListaPsg((Passageiro[]) jsonObject.get("Lista Psg"));
+			voo.setQntdePsg(Integer.parseInt((String) jsonObject.get("Quantidade Psg")));
 
 
-			System.out.printf("Passou!");
+			System.out.printf("Passou Aviao!\n");
 		}
 		//Trata as exceptions que podem ser lançadas no decorrer do processo
 		catch (FileNotFoundException e) {
@@ -68,68 +68,116 @@ public class Main {
 			e.printStackTrace();
 		}
 
-		JOptionPane.showMessageDialog(null,"Avião\n"+
+        JOptionPane.showMessageDialog(null,"Avião\n"+
                 "Modelo: "+aviao.getModelo()+"\n"+
                 "Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
                 "Altura: "+aviao.getAltura()+"\n"+
                 "Envergadura da asa: "+aviao.getEnverAsa()+"\n"+
                 "Comprimento: "+aviao.getComprimento()+"\n"+
-                "Capacidade carga: "+aviao.getCapacCarga()+"\n"+
-                "ListaPsg: "+aviao.getListaPsg()+"\n"+
-                "Quantidade Psg: "+aviao.getQntdePsg()+"\n");
-	*/
+                "Capacidade carga: "+aviao.getCapacCarga()+"\n");
+
+		/*
 		System.out.print("Avião\n"+
 						"Modelo: "+aviao.getModelo()+"\n"+
 						"Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
 						"Altura: "+aviao.getAltura()+"\n"+
 						"Envergadura da asa: "+aviao.getEnverAsa()+"\n"+
 						"Comprimento: "+aviao.getComprimento()+"\n"+
-						"Capacidade carga: "+aviao.getCapacCarga()+"\n");
+						"Capacidade carga: "+aviao.getCapacCarga()+"\n"+
+						"ListaPsg: "+aviao.getListaPsg()+"\n"+
+						"Quantidade Psg: "+aviao.getQntdePsg()+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
+		*/
+
 		// Voo 01
-		voo.setInfoVoo("incluido");
-		voo.setNumVoo(01);
-		voo.setCompAerea("TAM");
-		voo.setAviao(aviao);
-		voo.setData(data);
-		
-		horarioVoo = formHora.parse("12:30");
-		voo.setHorarioVoo(horarioVoo);
 
-		voo.setStatusVoo("Confirmado");
-		voo.setDestino("Dubai");
-		voo.setOrigem("Belo Horizonte");
+		try {
+			//Salva no objeto JSONObject o que o parse tratou do arquivo
+			jsonObject = (JSONObject) parser.parse(new FileReader(
+					"entrada-voo.json"));
 
-		System.out.print("Voo\n"+
-						"Info Voo: "+voo.getInfoVoo()+"\n"+
-						"Numero Voo: "+voo.getNumVoo()+"\n"+
-						"Companhia Aerea: "+voo.getCompAerea()+"\n"+
-						"Aviao: "+voo.getAviao().getModelo()+"\n"+
-						"Data: "+formData.format(voo.getData())+"\n"+
-						"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
-						"Status Voo: "+voo.getStatusVoo()+"\n"+
-						"Destino: "+voo.getDestino()+"\n"+
-						"Origem: "+voo.getOrigem()+"\n"+
-						"ListaPsg: "+voo.getListaPsg()+"\n"+
-						"Quantidade Psg: "+voo.getQntdePsg()+"\n");
+			//Salva nas variaveis os dados retirados do arquivo
 
-		System.out.print("\n\n----------\t----------\t----------\n\n");
+			voo.setInfoVoo((String) jsonObject.get("InfoVoo"));
+			voo.setNumVoo(Integer.parseInt((String) jsonObject.get("NumVoo")));
+			voo.setCompAerea((String) jsonObject.get("CompAerea"));
+			voo.setAviao(aviao);
+			voo.setData(data);
+
+			horarioVoo = formHora.parse((String) jsonObject.get("HorarioVoo"));
+			voo.setHorarioVoo(horarioVoo);
+
+			voo.setStatusVoo((String) jsonObject.get("StatusVoo"));
+			voo.setDestino((String) jsonObject.get("Destino"));
+			voo.setOrigem((String) jsonObject.get("Origem"));
+
+
+			System.out.printf("Passou Voo!\n");
+		}
+		//Trata as exceptions que podem ser lançadas no decorrer do processo
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		JOptionPane.showMessageDialog(null,"Voo\n"+
+				"Info Voo: "+voo.getInfoVoo()+"\n"+
+				"Numero Voo: "+voo.getNumVoo()+"\n"+
+				"Companhia Aerea: "+voo.getCompAerea()+"\n"+
+				"Aviao: "+voo.getAviao().getModelo()+"\n"+
+				"Data: "+formData.format(voo.getData())+"\n"+
+				"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
+				"Status Voo: "+voo.getStatusVoo()+"\n"+
+				"Destino: "+voo.getDestino()+"\n"+
+				"Origem: "+voo.getOrigem()+"\n"+
+                "ListaPsg: "+voo.getListaPsg()+"\n"+
+                "Quantidade Psg: "+voo.getQntdePsg()+"\n");
+
+		//System.out.print("\n\n----------\t----------\t----------\n\n");
+
+
+
 		//Passageiro
-		passageiro.setNome("João Lucas");
-		passageiro.setTelef("37 9 9921-3455");
-		passageiro.setEmail("joaozin@gmail.com");
-		passageiro.setCpf("12345678910");
-		dataNasc = formData.parse("29/03/2017");
-		passageiro.setDataNasc(dataNasc);
 
-		System.out.print("Passageiro\n"+
+		try {
+			//Salva no objeto JSONObject o que o parse tratou do arquivo
+			jsonObject = (JSONObject) parser.parse(new FileReader(
+					"entrada-passageiro.json"));
+
+			//Salva nas variaveis os dados retirados do arquivo
+
+			//System.out.println("DATA Nascimento:" + jsonObject.get("DataNasc"));
+			passageiro.setNome((String) jsonObject.get("Nome"));
+			passageiro.setTelef((String) jsonObject.get("Telef"));
+			passageiro.setEmail((String) jsonObject.get("Email"));
+			passageiro.setCpf((String) jsonObject.get("Cpf"));
+			dataNasc = formData.parse((String) jsonObject.get("DataNasc"));
+			passageiro.setDataNasc(dataNasc);
+
+			System.out.printf("Passou Passageiro!\n");
+		}
+		//Trata as exceptions que podem ser lançadas no decorrer do processo
+		catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		JOptionPane.showMessageDialog(null,"Passageiro\n"+
 						"Nome: "+passageiro.getNome()+"\n"+
 						"Telefone: "+passageiro.getTelef()+"\n"+
 						"E-mail: "+passageiro.getEmail()+"\n"+
 						"CPF: "+passageiro.getCpf()+"\n"+
 						"Data Nascimento: "+formData.format(passageiro.getDataNasc())+"\n");
 
-		System.out.print("\n\n----------\t----------\t----------\n\n");
+		//System.out.print("\n\n----------\t----------\t----------\n\n");
 	}
 }
