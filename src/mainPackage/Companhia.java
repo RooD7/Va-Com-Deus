@@ -36,25 +36,25 @@ public class Companhia {
 	// Cadastra os voo da Companhia Aerea
 	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date data, Date horarioVoo, String statusVoo, String destino, String origem) {
 
-		// Cria um novo voo
-		Voo voo = new Voo(aviao);
-
-		voo.setInfoVoo(infoVoo);
-		voo.setNumVoo(numVoo);
-		voo.setCompAerea(compAerea);
-		voo.setAviao(aviao);
-		voo.setData(data);
-		voo.setHorarioVoo(horarioVoo);
-		voo.setStatusVoo(statusVoo);
-		voo.setDestino(destino);
-		voo.setOrigem(origem);
-		
-		// Adiciona o novo voo a lista de voo's
 		// Encontra uma posicao vazia na Lista de Voo's
 		for (int i = 0; i < this.listVoo.length; i++) {
 			if (this.listVoo[i] == null) {
 				//Adiciona o voo na lista
-				this.listVoo[i] = voo;
+
+				// Cria um novo voo
+				this.listVoo[i] = new Voo(aviao);
+
+				// Adiciona o novo voo a lista de voo's
+				this.listVoo[i].setInfoVoo(infoVoo);
+				this.listVoo[i].setNumVoo(numVoo);
+				this.listVoo[i].setCompAerea(compAerea);
+				this.listVoo[i].setAviao(aviao);
+				this.listVoo[i].setData(data);
+				this.listVoo[i].setHorarioVoo(horarioVoo);
+				this.listVoo[i].setStatusVoo(statusVoo);
+				this.listVoo[i].setDestino(destino);
+				this.listVoo[i].setOrigem(origem);
+
 				//Atualiza o tamanho da lista
 				this.tamListVoo = i;
 				break;

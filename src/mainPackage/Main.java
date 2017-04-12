@@ -12,6 +12,8 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import javax.swing.*;
+
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -65,6 +67,16 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+        JOptionPane.showMessageDialog(null,"Avião\n"+
+                "Modelo: "+aviao.getModelo()+"\n"+
+                "Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
+                "Altura: "+aviao.getAltura()+"\n"+
+                "Envergadura da asa: "+aviao.getEnverAsa()+"\n"+
+                "Comprimento: "+aviao.getComprimento()+"\n"+
+                "Capacidade carga: "+aviao.getCapacCarga()+"\n"+
+                "ListaPsg: "+aviao.getListaPsg()+"\n"+
+                "Quantidade Psg: "+aviao.getQntdePsg()+"\n");
 
 		System.out.print("Avião\n"+
 						"Modelo: "+aviao.getModelo()+"\n"+
