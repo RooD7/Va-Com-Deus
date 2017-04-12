@@ -6,8 +6,6 @@ public class Aviao {
 	private Double enverAsa;
 	private Double comprimento;
 	private Double capacCarga;
-	private Passageiro[] listaPsg;
-	private int qntdePsg;
 
 	public Aviao() {
 		modelo = "";
@@ -16,8 +14,6 @@ public class Aviao {
 		enverAsa = 0.0;
 		comprimento = 0.0;
 		capacCarga = 0.0;
-		listaPsg = null;
-		qntdePsg = 0;
 	}
 
 	public String getModelo() {
@@ -60,19 +56,5 @@ public class Aviao {
 	}
 	public void setCapacCarga(Double capacCarga) {
 		this.capacCarga = capacCarga;
-	}
-
-	public Passageiro[] getListaPsg() {
-		return listaPsg;
-	}
-	public void setListaPsg(Passageiro[] listaPsg) {
-		this.listaPsg = listaPsg;
-	}
-
-	public int getQntdePsg() {
-		return qntdePsg;
-	}
-	public void setQntdePsg(int qntdePsg) {
-		this.qntdePsg = qntdePsg;
 	}
 }

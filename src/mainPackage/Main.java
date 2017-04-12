@@ -8,12 +8,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 
+/*
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
-import javax.swing.*;
-
+*/
 public class Main {
 
 	public static void main(String[] args) throws Exception {
@@ -31,6 +30,7 @@ public class Main {
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 
+		/*
 		JSONObject jsonObject;
 		//Cria o parse de tratamento
 		JSONParser parser = new JSONParser();
@@ -68,7 +68,7 @@ public class Main {
 			e.printStackTrace();
 		}
 
-        JOptionPane.showMessageDialog(null,"Avião\n"+
+		JOptionPane.showMessageDialog(null,"Avião\n"+
                 "Modelo: "+aviao.getModelo()+"\n"+
                 "Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
                 "Altura: "+aviao.getAltura()+"\n"+
@@ -77,16 +77,14 @@ public class Main {
                 "Capacidade carga: "+aviao.getCapacCarga()+"\n"+
                 "ListaPsg: "+aviao.getListaPsg()+"\n"+
                 "Quantidade Psg: "+aviao.getQntdePsg()+"\n");
-
+	*/
 		System.out.print("Avião\n"+
 						"Modelo: "+aviao.getModelo()+"\n"+
 						"Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
 						"Altura: "+aviao.getAltura()+"\n"+
 						"Envergadura da asa: "+aviao.getEnverAsa()+"\n"+
 						"Comprimento: "+aviao.getComprimento()+"\n"+
-						"Capacidade carga: "+aviao.getCapacCarga()+"\n"+
-						"ListaPsg: "+aviao.getListaPsg()+"\n"+
-						"Quantidade Psg: "+aviao.getQntdePsg()+"\n");
+						"Capacidade carga: "+aviao.getCapacCarga()+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
 		// Voo 01
@@ -112,7 +110,9 @@ public class Main {
 						"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
 						"Status Voo: "+voo.getStatusVoo()+"\n"+
 						"Destino: "+voo.getDestino()+"\n"+
-						"Origem: "+voo.getOrigem()+"\n");
+						"Origem: "+voo.getOrigem()+"\n"+
+						"ListaPsg: "+voo.getListaPsg()+"\n"+
+						"Quantidade Psg: "+voo.getQntdePsg()+"\n");
 
 		System.out.print("\n\n----------\t----------\t----------\n\n");
 		//Passageiro

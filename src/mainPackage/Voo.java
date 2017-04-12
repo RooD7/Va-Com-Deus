@@ -12,17 +12,20 @@ public class Voo {
 	private String destino;
 	private String origem;
 
+	private Passageiro[] listaPsg;
+	private int qntdePsg;
+
 	public Voo(Aviao aviao) {
 		infoVoo = "";
 		numVoo = 0;
 		compAerea = "";
-		//TODO construtor sendo chamado 2 vezes
-		//aviao = new Aviao();
 		data = null;
 		horarioVoo = null;
 		statusVoo = "";
 		destino = "";
 		origem = "";
+		listaPsg = null;
+		qntdePsg = 0;
 	}
 
 	public String getInfoVoo() {
@@ -86,5 +89,19 @@ public class Voo {
 	}
 	public void setOrigem(String origem) {
 		this.origem = origem;
+	}
+
+	public Passageiro[] getListaPsg() {
+		return listaPsg;
+	}
+	public void setListaPsg(Passageiro[] listaPsg) {
+		this.listaPsg = listaPsg;
+	}
+
+	public int getQntdePsg() {
+		return qntdePsg;
+	}
+	public void setQntdePsg(int qntdePsg) {
+		this.qntdePsg = qntdePsg;
 	}
 }

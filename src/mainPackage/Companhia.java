@@ -2,6 +2,7 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Companhia {
+	
 	private String nome;
 	private Voo[] listVoo = new Voo[1000];
 	private int tamListVoo = 0;
@@ -34,13 +35,13 @@ public class Companhia {
 	}
 
 	// Cadastra os voo da Companhia Aerea
-	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date data, Date horarioVoo, String statusVoo, String destino, String origem) {
-
+	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date data, 
+		Date horarioVoo, String statusVoo, String destino, String origem, Passageiro[] listaPsg, int qntdePsg) {
+		
+		// Adiciona o novo voo a lista de voo's
 		// Encontra uma posicao vazia na Lista de Voo's
 		for (int i = 0; i < this.listVoo.length; i++) {
 			if (this.listVoo[i] == null) {
-				//Adiciona o voo na lista
-
 				// Cria um novo voo
 				this.listVoo[i] = new Voo(aviao);
 
@@ -54,6 +55,8 @@ public class Companhia {
 				this.listVoo[i].setStatusVoo(statusVoo);
 				this.listVoo[i].setDestino(destino);
 				this.listVoo[i].setOrigem(origem);
+				this.listVoo[i].setListaPsg(listaPsg);
+				this.listVoo[i].setQntdePsg(qntdePsg);
 
 				//Atualiza o tamanho da lista
 				this.tamListVoo = i;
