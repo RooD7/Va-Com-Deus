@@ -3,7 +3,7 @@
  	private Companhia[] listComp = new Companhia[1000];
  	private int tamListComp;
 
-
+    //comitar essa bosta
  	// Cadastra Companhia Aerea
 	public void cadastrarCompanhia(String nome, Voo[] listVoo, int tamListVoo) {
 		
