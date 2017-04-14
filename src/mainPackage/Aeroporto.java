@@ -1,3 +1,5 @@
+package mainPackage;
+
  public class Aeroporto {
 
  	private Companhia[] listComp = new Companhia[1000];

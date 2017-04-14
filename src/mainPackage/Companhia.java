@@ -1,3 +1,5 @@
+package mainPackage;
+
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -5,16 +7,9 @@ public class Companhia {
 	
 	private String nome;
 	private Voo[] listVoo = new Voo[1000];
-	private int tamListVoo = 0;
+	private int tamListVoo;
 	private int qntdeVoo;
-/*
-	public Companhia(String nome,Voo[] listVoo,int tamListVoo,int qntdeVoo) {
-		this.nome = nome;
-		this.listVoo = listVoo;
-		this.tamListVoo = tamListVoo;
-		this.qntdeVoo = qntdeVoo;
-	}
-*/
+
 
 	public Companhia(){
 
