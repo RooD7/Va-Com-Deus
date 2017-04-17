@@ -1,3 +1,5 @@
+package mainPackage;
+
 public class Aviao {
 
 	private String modelo;
