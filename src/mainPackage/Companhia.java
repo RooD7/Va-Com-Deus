@@ -6,9 +6,9 @@ import java.text.SimpleDateFormat;
 public class Companhia {
 	
 	private String nome;
-	private Voo[] listVoo = new Voo[1000];
+	private Voo[] listVoo = new Voo[100];
 	private int tamListVoo;
-	private int qntdeVoo;
+	private int qntdeVoo; //qntde voos realizados
 
 
 	public Companhia(){
@@ -44,7 +44,7 @@ public class Companhia {
 	}
 
 	// Cadastra os voo da Companhia Aerea
-	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date data, 
+	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date dataVoo, 
 		Date horarioVoo, String statusVoo, String destino, String origem, Passageiro[] listaPsg, int qntdePsg) {
 		
 		// Adiciona o novo voo a lista de voo's
@@ -59,7 +59,7 @@ public class Companhia {
 				this.listVoo[i].setNumVoo(numVoo);
 				this.listVoo[i].setCompAerea(compAerea);
 				this.listVoo[i].setAviao(aviao);
-				this.listVoo[i].setData(data);
+				this.listVoo[i].setDataVoo(dataVoo);
 				this.listVoo[i].setHorarioVoo(horarioVoo);
 				this.listVoo[i].setStatusVoo(statusVoo);
 				this.listVoo[i].setDestino(destino);
@@ -88,7 +88,7 @@ public class Companhia {
 						"Numero Voo: "+listVoo[i].getNumVoo()+"\n"+
 						"Companhia Aerea: "+listVoo[i].getCompAerea()+"\n"+
 						"Aviao: "+listVoo[i].getAviao().getModelo()+"\n"+
-						"Data: "+formData.format(listVoo[i].getData())+"\n"+
+						"Data: "+formData.format(listVoo[i].getDataVoo())+"\n"+
 						"Horario Voo: "+ formHora.format(listVoo[i].getHorarioVoo())+"\n"+
 						"Status Voo: "+listVoo[i].getStatusVoo()+"\n"+
 						"Destino: "+listVoo[i].getDestino()+"\n"+

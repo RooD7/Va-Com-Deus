@@ -8,7 +8,7 @@ public class Voo {
 	private int numVoo;
 	private String compAerea;
 	private Aviao aviao;
-	private Date data;
+	private Date dataVoo;
 	private Date horarioVoo;
 	private String statusVoo; // confirmado, cancelado, atrasado
 	private String destino;
@@ -21,7 +21,7 @@ public class Voo {
 		infoVoo = "";
 		numVoo = 0;
 		compAerea = "";
-		data = null;
+		dataVoo = null;
 		horarioVoo = null;
 		statusVoo = "";
 		destino = "";
@@ -58,11 +58,11 @@ public class Voo {
 		this.aviao = aviao;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDataVoo() {
+		return dataVoo;
 	}
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataVoo(Date dataVoo) {
+		this.dataVoo = dataVoo;
 	}
 
 	public Date getHorarioVoo() {
