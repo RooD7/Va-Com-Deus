@@ -1,4 +1,4 @@
-package mainPackage;
+//package mainPackage;
 import java.util.Date;
 import java.util.Calendar;
 
@@ -43,7 +43,7 @@ import java.util.Calendar;
 		c.setTime(dataAtual);
 		
 		// dataInicial = 01/numMes/20**
-		c.set(Calendar.DAY_OF_MONTH, "01");
+		c.set(Calendar.DAY_OF_MONTH, 1);
 		c.set(Calendar.MONTH, numMes);
 		dataInicial = c.getTime();
 
@@ -70,7 +70,7 @@ import java.util.Calendar;
 
 	//Lucro por Voo's
 	public double LucroVoo() {
-		
+		return 0.0;
 	}
 
 	//Tratar limite de 4 decolagens a cada 30 min
