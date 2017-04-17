@@ -69,8 +69,16 @@ import java.util.Calendar;
 	}
 
 	//Lucro por Voo's
-	public double LucroVoo() {
-		return 0.0;
+	public double LucroVoo(Voo voo) {
+		if((voo.getInfoVoo() == "INCLUIDO") && (voo.getStatusVoo() == "CONFIRMADO")) {
+
+			if(voo.aviao.getCapacCarga() > 30) {
+				// 10 mil por decolagem + R$1000,00 a cada tonelada excedente a 30 toneladas.
+				return (Double)(10000 + (1000*(voo.aviao.getCapacCarga() - 30)))
+			}
+			else
+				return (10000.0);
+		}
 	}
 
 	//Tratar limite de 4 decolagens a cada 30 min
