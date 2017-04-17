@@ -1,5 +1,6 @@
-package mainPackage;
+//package mainPackage;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Passageiro {
@@ -53,6 +54,17 @@ public class Passageiro {
 	}
 	public void setDataNasc(Date dataNasc) {
 		this.dataNasc = dataNasc;
+	}
+
+	public String imprime() {
+
+		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
+		return "Passageiro\n"+
+				"Nome: "+getNome()+"\n"+
+				"Telefone: "+getTelef()+"\n"+
+				"E-mail: "+getEmail()+"\n"+
+				"CPF: "+getCpf()+"\n"+
+				"Data Nascimento: "+formData.format(getDataNasc())+"\n";
 	}
 
 }

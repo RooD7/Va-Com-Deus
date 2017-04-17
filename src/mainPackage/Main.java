@@ -1,6 +1,6 @@
-package mainPackage;
+//package mainPackage;
 
-import java.util.Date;
+import javax.swing.*;
 import java.text.SimpleDateFormat;
 
 public class Main {
@@ -10,7 +10,9 @@ public class Main {
 		Aviao aviao = new Aviao();
 		Voo voo = new Voo(aviao);
 		Passageiro passageiro = new Passageiro();
-		
+		String entrada = "";
+		int opcao = -1;
+
 		Passageiro[] listaPsg;
 		listaPsg = new Passageiro[1000];
 		
@@ -21,15 +23,33 @@ public class Main {
 		JOption jopt = new JOption();
 
 		// Aviao
-		aviao = json.getJsonAviao(aviao);
-        jopt.showJOptionAviao(aviao);
+		entrada = "entrada-aviao.json";
+		aviao = json.getJsonAviao(entrada, aviao);
+		//jopt.showJOptionAviao(aviao);
 
 		// Voo 01
-		voo = json.getJsonVoo(voo, aviao);
-		jopt.showJOptionVoo(voo);
+		entrada = "entrada-voo.json";
+		voo = json.getJsonVoo(entrada, voo, aviao);
+		//jopt.showJOptionVoo(voo);
 
 		// Passageiro
-		passageiro = json.getJsonPassageiro(passageiro);
-		jopt.showJOptionPassageiro(passageiro);
+		entrada = "entrada-passageiro.json";
+		passageiro = json.getJsonPassageiro(entrada, passageiro);
+		//jopt.showJOptionPassageiro(passageiro);
+
+		opcao = jopt.showJOptionMenu();
+
+		switch (opcao) {
+			case 1: break;
+			case 2: break;
+			case 3: break;
+			case 4: break;
+			case 5: break;
+			case 6: break;
+			case 7: break;
+			case 8: break;
+			case 0: break;
+			default: jopt.erro("[0-8]");
+		}
 	}
 }

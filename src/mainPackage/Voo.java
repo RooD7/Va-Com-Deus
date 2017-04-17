@@ -1,5 +1,6 @@
-package mainPackage;
+//package mainPackage;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Voo {
@@ -106,4 +107,24 @@ public class Voo {
 	public void setQntdePsg(int qntdePsg) {
 		this.qntdePsg = qntdePsg;
 	}
+
+
+	public String imprime() {
+
+		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
+		return "Voo\n"+
+				"Info Voo: "+getInfoVoo()+"\n"+
+				"Numero Voo: "+getNumVoo()+"\n"+
+				"Companhia Aerea: "+getCompAerea()+"\n"+
+				"Aviao: "+getAviao().getModelo()+"\n"+
+				"Data: "+formData.format(getDataVoo())+"\n"+
+				"Horario Voo: "+ formHora.format(getHorarioVoo())+"\n"+
+				"Status Voo: "+getStatusVoo()+"\n"+
+				"Destino: "+getDestino()+"\n"+
+				"Origem: "+getOrigem()+"\n"+
+				"ListaPsg: "+getListaPsg()+"\n"+
+				"Quantidade Psg: "+getQntdePsg()+"\n";
+	}
+
 }

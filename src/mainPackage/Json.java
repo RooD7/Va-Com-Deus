@@ -1,13 +1,14 @@
-package mainPackage;
+//package mainPackage;
+
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 
 public class Json {
@@ -17,12 +18,12 @@ public class Json {
 	JSONParser parser = new JSONParser();
 	//Variaveis que irao armazenar os dados do arquivo JSON
 
-	public Aviao getJsonAviao(Aviao aviao) {
+	public Aviao getJsonAviao(String entrada, Aviao aviao) {
 
 		try {
 			//Salva no objeto JSONObject o que o parse tratou do arquivo
 			jsonObject = (JSONObject) parser.parse(new FileReader(
-					"entrada-aviao.json"));
+					entrada));
 
 			//Salva nas variaveis os dados retirados do arquivo
 			aviao.setModelo((String) jsonObject.get("Modelo"));
@@ -44,12 +45,12 @@ public class Json {
 		return aviao;
 	}
 
-	public Voo getJsonVoo(Voo voo, Aviao aviao) throws Exception {
+	public Voo getJsonVoo(String entrada, Voo voo, Aviao aviao) throws Exception {
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 		try {
 			//Salva no objeto JSONObject o que o parse tratou do arquivo
 			jsonObject = (JSONObject) parser.parse(new FileReader(
-					"entrada-voo.json"));
+					entrada));
 
 			//Salva nas variaveis os dados retirados do arquivo
 
@@ -61,7 +62,7 @@ public class Json {
 			voo.setAviao(aviao);
 
 			Date data = new Date();
-			voo.setData(data);	//Data atual do sistema
+			voo.setDataVoo(data);	//Data atual do sistema
 
 			Date horarioVoo = new Date();
 			horarioVoo = formHora.parse((String) jsonObject.get("HorarioVoo"));
@@ -84,12 +85,12 @@ public class Json {
 		return voo;
 	}
 
-	public Passageiro getJsonPassageiro(Passageiro passageiro) throws Exception {
+	public Passageiro getJsonPassageiro(String entrada, Passageiro passageiro) throws Exception {
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			//Salva no objeto JSONObject o que o parse tratou do arquivo
 			jsonObject = (JSONObject) parser.parse(new FileReader(
-					"entrada-passageiro.json"));
+					entrada));
 
 			//Salva nas variaveis os dados retirados do arquivo
 
