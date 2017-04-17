@@ -1,45 +1,37 @@
-package mainPackage;
+//package mainPackage;
 
-import java.text.SimpleDateFormat;
-
-import javax.swing.JOptionPane;
+import javax.swing.*;
 
 public class JOption {
 
 	public void showJOptionAviao(Aviao aviao) {
-		JOptionPane.showMessageDialog(null,"Avião\n"+
-                "Modelo: "+aviao.getModelo()+"\n"+
-                "Autonomia: "+aviao.getAutonomiaVoo()+"\n"+
-                "Altura: "+aviao.getAltura()+"\n"+
-                "Envergadura da asa: "+aviao.getEnverAsa()+"\n"+
-                "Comprimento: "+aviao.getComprimento()+"\n"+
-                "Capacidade carga: "+aviao.getCapacCarga()+"\n");
+		JOptionPane.showMessageDialog(null, aviao.imprime(), "Aviao", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public void showJOptionVoo(Voo voo) {
-		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
-		JOptionPane.showMessageDialog(null,"Voo\n"+
-				"Info Voo: "+voo.getInfoVoo()+"\n"+
-				"Numero Voo: "+voo.getNumVoo()+"\n"+
-				"Companhia Aerea: "+voo.getCompAerea()+"\n"+
-				"Aviao: "+voo.getAviao().getModelo()+"\n"+
-				"Data: "+formData.format(voo.getData())+"\n"+
-				"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
-				"Status Voo: "+voo.getStatusVoo()+"\n"+
-				"Destino: "+voo.getDestino()+"\n"+
-				"Origem: "+voo.getOrigem()+"\n"+
-                "ListaPsg: "+voo.getListaPsg()+"\n"+
-                "Quantidade Psg: "+voo.getQntdePsg()+"\n");
+		JOptionPane.showMessageDialog(null,voo.imprime(), "Voo", JOptionPane.PLAIN_MESSAGE);
 	}
 
 	public void showJOptionPassageiro(Passageiro passageiro) {
-		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
-		JOptionPane.showMessageDialog(null,"Passageiro\n"+
-						"Nome: "+passageiro.getNome()+"\n"+
-						"Telefone: "+passageiro.getTelef()+"\n"+
-						"E-mail: "+passageiro.getEmail()+"\n"+
-						"CPF: "+passageiro.getCpf()+"\n"+
-						"Data Nascimento: "+formData.format(passageiro.getDataNasc())+"\n");
+		JOptionPane.showMessageDialog(null,passageiro.imprime(), "Passageiro", JOptionPane.PLAIN_MESSAGE);
+	}
+
+	public int showJOptionMenu() {
+		int opcao = 0;
+		opcao = Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir todos os voos\n" +
+				"2 - Exibir informacoes dos voos do usuario\n" + // exibir info voo do usuario
+				"3 - Alterar dados\n" + // usuario, voo ou aviao
+				"4 - Excluit dados\n" + // usuario, voo ou aviao
+				"5 - Cadastrar/Importar novas informacoes\n" + // usuario, voo ou aviao
+				"6 - Cadastrar/Exportar voos\n" + // em arquivos json
+				"7 - Exibir total de voos por companhia\n" +
+				"8 - Exibir lucro\n" +
+				"9 - Listar passageiros voo\n" +
+				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
+		return opcao;
+	}
+
+	public void erro(String valor) {
+		JOptionPane.showMessageDialog(null,"Valor inserido invalido.\nValor esperado: "+valor,"Valor Invalido",JOptionPane.ERROR_MESSAGE);
 	}
 }

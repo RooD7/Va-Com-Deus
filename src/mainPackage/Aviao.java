@@ -1,4 +1,4 @@
-package mainPackage;
+//package mainPackage;
 
 public class Aviao {
 
@@ -17,6 +17,7 @@ public class Aviao {
 		comprimento = 0.0;
 		capacCarga = 0.0;
 	}
+
 
 	public String getModelo() {
 		return modelo;
@@ -59,4 +60,14 @@ public class Aviao {
 	public void setCapacCarga(Double capacCarga) {
 		this.capacCarga = capacCarga;
 	}
+
+	public String imprime(){
+		return "Avião\n"+
+				"Modelo: "+getModelo()+"\n"+
+				"Autonomia: "+getAutonomiaVoo()+"\n"+
+				"Altura: "+getAltura()+"\n"+
+				"Envergadura da asa: "+getEnverAsa()+"\n"+
+				"Comprimento: "+getComprimento()+"\n"+
+				"Capacidade carga: "+getCapacCarga()+"\n";
+	};
 }

@@ -1,7 +1,7 @@
-package mainPackage;
+//package mainPackage;
 
-import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Companhia {
 	
