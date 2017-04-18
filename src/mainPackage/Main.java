@@ -8,6 +8,11 @@ public class Main {
 
 	public static void main(String[] args) throws Exception {
 
+		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
+
+		Aeroporto vaComDeus = new Aeroporto();
+		
 		Aviao aviao = new Aviao();
 		Voo voo = new Voo(aviao);
 		Passageiro passageiro = new Passageiro();
@@ -16,9 +21,6 @@ public class Main {
 
 		Passageiro[] listaPsg;
 		listaPsg = new Passageiro[1000];
-		
-		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 
 		Json json = new Json();
 		JOption jopt = new JOption();
@@ -43,16 +45,61 @@ public class Main {
 			opcao = jopt.showJOptionMenu();
 
 			switch (opcao) {
-				case 1: break;
-				case 2: break;
-				case 3: break;
-				case 4: break;
-				case 5: break;
-				case 6: break;
-				case 7: break;
-				case 8: break;
-				case 9: break;
-				case 0: break;
+				//Exibir todos os voos
+				case 1: {
+					break;
+				}
+				// Exibir informações dos voos do usuario
+				case 2: {
+					break;
+				}
+				// Alterar dados
+				case 3: {
+					break;
+				}
+				// Excluir dados
+				case 4: {
+					break;
+				}
+				// Cadastrar/Importar novas informações
+				case 5: {
+					// CRIAR E ADICIONAR AQUI O SUB MENU
+					// vaComDeus.listComp[].cadastrarAviao(Double autonomiaVoo, Double altura, Double enverAsa, Double comprimento, Double capacCarga);
+					// vaComDeus.listComp[].cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date dataVoo, Date horarioVoo, String statusVoo, String destino, String origem, Passageiro[] listaPsg, int qntdePsg); 
+					break;
+				}
+				// Cadastrar/Exportar voos
+				case 6: {
+					// vaComDeus.exportarVoo()
+					break;
+				}
+				// Exibir total de voos por companhia
+				case 7: {
+					// (int) vaComDeus.voosMesCompanhia(Companhia comp, int numMes)
+					break;
+				}
+				// Exibir lucro
+				case 8: {
+					// (double) lucroVoo(Voo voo)
+					break;
+				}
+				//Listar passageiros do voo
+				case 9: {
+					do {
+						//Recebe o numero do voo
+						int num = jopt.inputJOptionInteger("Digite o número do voo [0-100]\n");
+						//Busca a lista de passageiros pelo num
+						String str = vaComDeus.listPsgPorNumVoo(num);
+						//Nao encontrou o voo
+						if (str.equals("")) {
+							jopt.erro("");
+						}
+					} while(str.equals(""));
+					break;
+				}
+				case 0: {
+					break;
+				}
 				default: jopt.erro("[0-9]");
 			}
 		}

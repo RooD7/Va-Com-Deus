@@ -15,7 +15,7 @@ public class Voo {
 	private String destino;
 	private String origem;
 
-	private Passageiro[] listaPsg;
+	private Passageiro[] listaPsg = new Passageiro[1000];
 	private int qntdePsg;
 
 	public Voo(Aviao aviao) {

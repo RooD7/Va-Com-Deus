@@ -7,7 +7,9 @@ public class Companhia {
 	
 	private String nome;
 	private Voo[] listVoo = new Voo[100];
+	private Aviao[] listAviao = new Aviao[100];
 	private int tamListVoo;
+	private int tamListAviao;
 	private int qntdeVoo; //qntde voos realizados
 
 
@@ -34,6 +36,13 @@ public class Companhia {
 		this.listVoo = listVoo;
 	}
 
+	public Voo[] getListAviao() {
+		return listAviao;
+	}
+	public void setListAviao(Aviao[] listAviao) {
+		this.listAviao = listAviao;
+	}
+
 	// Retorna um Voo da lista
 	public Voo getVoo(int numVoo) {
 		if (numVoo < this.listVoo.length)
@@ -43,7 +52,31 @@ public class Companhia {
 			return null;
 	}
 
-	// Cadastra os voo da Companhia Aerea
+	// Cadastra o aviao da Companhia Aerea
+	public void cadastrarAviao(Double autonomiaVoo, Double altura, Double enverAsa, Double comprimento, Double capacCarga) {
+	
+		// Adiciona o novo aviao a lista de avioes
+		// Encontra uma posicao vazia na Lista de Avioes
+		for (int i = 0; i < this.listAviao.length; i++) {
+			if (this.listAviao[i] == null) {
+				// Cria um novo Aviao
+				this.listAviao[i] = new Aviao();
+
+				// Adiciona o novo aviao a lista de avioes
+				this.listAviao[i].setAutonomiaVoo(autonomiaVoo);
+				this.listAviao[i].setAltura(altura);
+				this.listAviao[i].setEnverAsa(enverAsa);
+				this.listAviao[i].setComprimento(comprimento);
+				this.listAviao[i].setCapacCarga(capacCarga);
+
+				//Atualiza o tamanho da lista
+				this.tamListAviao = i;
+				break;
+			}
+		}
+	}
+
+	// Cadastra os voo's da Companhia Aerea
 	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date dataVoo, 
 		Date horarioVoo, String statusVoo, String destino, String origem, Passageiro[] listaPsg, int qntdePsg) {
 		
