@@ -1,7 +1,7 @@
-//package mainPackage;
+package mainPackage;
 import java.util.Date;
 import java.util.Calendar;
-import java.util.SimpleDateFormat;
+import java.text.SimpleDateFormat;
 
  public class Aeroporto {
 
@@ -9,20 +9,41 @@ import java.util.SimpleDateFormat;
  	private int tamListComp;
 
  	public Aeroporto() {
- 		this.listComp = null;
+ 		//this.listComp = null;
  		this.tamListComp = 0;
  	}
 
-    public Companhia[] getCompanhia() {
+    public Companhia[] getListCompanhia() {
     	return this.listComp;
     }
+    
+    public Companhia getCompanhia(String nome) {
+    	System.out.println("aki");
+    	for (int i = 0; i < this.tamListComp; i++) {
+    		System.out.print("GetNome: "+this.listComp[i].getNome()+"\n");
+    		if(this.listComp[i].getNome().equals(nome)) {
+    			return this.listComp[i];
+    		}
+    		System.out.println("aki");
+    	}
+    	System.out.println("aki3");
+    	cadastrarCompanhia(nome);
+    	return getUltimaCompanhia();
+    }
+    
+    // Retorna Ultimo Aviao Cadastrado
+ 	public Companhia getUltimaCompanhia() {
+ 		System.out.print("tams: "+this.tamListComp+"\n");
+ 		System.out.println("Ult: "+this.listComp[this.tamListComp-1].getNome()+"\n");
+ 		return this.listComp[this.tamListComp-1];
+ 	}
 
     public int getTamListComp() {
     	return this.tamListComp;
     }
 
  	// Cadastra Companhia Aerea
-	public void cadastrarCompanhia(String nome, Voo[] listVoo, int tamListVoo) {
+	public void cadastrarCompanhia(String nome) {
 		
 		// Adiciona o novo voo a lista de voo's
 		// Encontra uma posicao vazia na Lista de Voo's
@@ -30,14 +51,10 @@ import java.util.SimpleDateFormat;
 			if (this.listComp[i] == null) {
 
 				// Cria uma nova Companhia
-				this.listComp[i] = new Companhia();
-				//Adiciona os dados da Companhia na lista
-				this.listComp[i].setNome(nome);
-				this.listComp[i].setListVoo(listVoo);
-				this.listComp[i].setQntdeVoo(tamListVoo);
+				this.listComp[i] = new Companhia(nome);
 
 				//Atualiza o tamanho da lista
-				this.tamListComp = i;
+				this.tamListComp++;
 				break;
 			}
 		}
@@ -85,16 +102,17 @@ import java.util.SimpleDateFormat;
 	public double lucroVoo(Voo voo) {
 		if((voo.getInfoVoo() == "INCLUIDO") && (voo.getStatusVoo() == "CONFIRMADO")) {
 
-			if(voo.aviao.getCapacCarga() > 30) {
+			if(voo.getAviao().getCapacCarga() > 30) {
 				// 10 mil por decolagem + R$1000,00 a cada tonelada excedente a 30 toneladas.
-				return (Double)(10000 + (1000*(voo.aviao.getCapacCarga() - 30)))
+				return (Double)(10000 + (1000*(voo.getAviao().getCapacCarga() - 30)));
 			}
-			else
-				return (10000.0);
+			return (10000.0);
 		}
+		return 0.0;
 	}
 
 	//Tratar limite de 4 decolagens a cada 30 min
+	/*
 	public boolean limiteVoo30Min() {
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
@@ -119,7 +137,7 @@ import java.util.SimpleDateFormat;
 		}
 		return passouDoLimite;
 	}
-
+	
 	//Listar os passageiros do voo pelo numero do voo
 	public String listPsgPorNumVoo(int numVoo) {
 		String dadosPsgs = "";
@@ -138,4 +156,5 @@ import java.util.SimpleDateFormat;
 		}
 		return dadosPsgs;
 	}
+	*/
  }

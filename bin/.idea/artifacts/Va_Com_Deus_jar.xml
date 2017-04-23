@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Va-Com-Deus:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Va_Com_Deus_jar</output-path>
+    <root id="archive" name="Va-Com-Deus.jar">
+      <element id="module-output" name="Va-Com-Deus" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../json-simple-1.1.1.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

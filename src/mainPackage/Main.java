@@ -1,48 +1,39 @@
-//package mainPackage;
-//merge funcionou
+package mainPackage;
 
 import javax.swing.*;
 import java.text.SimpleDateFormat;
 
 public class Main {
 
+	// Quando o usuário cadastrar Voo e digitar o nome da companhia, criar companhia com aquele nome
 	public static void main(String[] args) throws Exception {
-
+		
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
-
-		Aeroporto vaComDeus = new Aeroporto();
-		
-		Aviao aviao = new Aviao();
-		Voo voo = new Voo(aviao);
-		Passageiro passageiro = new Passageiro();
-		String entrada;
-		int opcao = -1;
-
-		Passageiro[] listaPsg;
-		listaPsg = new Passageiro[1000];
-
 		Json json = new Json();
 		JOption jopt = new JOption();
 
-		// Aviao
-		entrada = "entrada-aviao.json";
-		aviao = json.getJsonAviao(entrada, aviao);
-		jopt.showJOptionAviao(aviao);
-
-		// Voo 01
-		entrada = "entrada-voo.json";
-		voo = json.getJsonVoo(entrada, voo, aviao);
-		jopt.showJOptionVoo(voo);
-
-		// Passageiro
-		entrada = "entrada-passageiro.json";
-		passageiro = json.getJsonPassageiro(entrada, passageiro);
-		jopt.showJOptionPassageiro(passageiro);
+		int numComp = 0;
+		int numAviao = 0;
+		int numVoo = 0;
+		String nameInputFile;
+		String nameComp;
+		int opcao = -1;
+		int opcao5 = 2; //MUDAR
+		boolean inputFile;
+		
+		
+		Aeroporto vaComDeus = new Aeroporto();
+		vaComDeus.cadastrarCompanhia("Do Chão Não Passa!");
+		
+		Aviao aviao;
+		Voo voo;
+		Passageiro passageiro;
 
 		while (opcao != 0){
-
+			System.out.println("OPCAO5: "+opcao5);
 			opcao = jopt.showJOptionMenu();
+			System.out.println("OPCAO: "+opcao);
 
 			switch (opcao) {
 				//Exibir todos os voos
@@ -63,9 +54,40 @@ public class Main {
 				}
 				// Cadastrar/Importar novas informações
 				case 5: {
-					// CRIAR E ADICIONAR AQUI O SUB MENU
-					// vaComDeus.listComp[].cadastrarAviao(Double autonomiaVoo, Double altura, Double enverAsa, Double comprimento, Double capacCarga);
-					// vaComDeus.listComp[].cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date dataVoo, Date horarioVoo, String statusVoo, String destino, String origem, Passageiro[] listaPsg, int qntdePsg); 
+					opcao5 = jopt.showJOptionSubMenu5(); // tela ou arquivo
+					if(opcao5 == 2) { //arquivo
+						opcao5 = jopt.showJOptionSubMenu5Tipo(); // tipo (aviao(1), voo(2), pass(3))
+						nameInputFile = jopt.showJOptionSubMenu5Str();
+						switch (opcao5) {
+							case 1:	//aviao
+								aviao = new Aviao();
+								nameInputFile = "entrada-aviao.json";	//apagar
+								aviao = json.getJsonAviao(nameInputFile, aviao);
+								vaComDeus.getUltimaCompanhia().cadastrarAviao(aviao);
+								jopt.showJOptionAviao(aviao);	//apagar
+								break;
+							case 2:	//voo
+								voo = new Voo();
+								nameInputFile = "entrada-voo.json"; //apagar
+								voo = json.getJsonVoo(nameInputFile, voo, null);
+								System.out.println("Companhia: "+voo.getCompAerea()+"\n\n");
+								vaComDeus.getCompanhia(voo.getCompAerea()); // se a comp no existe, ele cria
+								vaComDeus.getUltimaCompanhia().cadastrarVoo(voo, null);
+								
+								
+								vaComDeus.getCompanhia(voo.getCompAerea()).cadastrarVoo(voo, vaComDeus.getCompanhia(voo.getCompAerea()).getUltimoAviao());
+								jopt.showJOptionVoo(voo); //apagar
+								break;
+							case 3:	//passageiro
+								passageiro = new Passageiro();
+								nameInputFile = "entrada-passageiro.json";	//apagar
+								passageiro = json.getJsonPassageiro(nameInputFile, passageiro);
+								vaComDeus.getUltimaCompanhia().getUltimoVoo().cadastrarPassageiro(passageiro);
+								jopt.showJOptionPassageiro(passageiro);	//apagar
+								break;
+						}
+						opcao5 = -1;
+					}
 					break;
 				}
 				// Cadastrar/Exportar voos
@@ -85,11 +107,12 @@ public class Main {
 				}
 				//Listar passageiros do voo
 				case 9: {
+					String str = "";
 					do {
 						//Recebe o numero do voo
 						int num = jopt.inputJOptionInteger("Digite o número do voo [0-100]\n");
 						//Busca a lista de passageiros pelo num
-						String str = vaComDeus.listPsgPorNumVoo(num);
+						//str = vaComDeus.listPsgPorNumVoo(num);
 						//Nao encontrou o voo
 						if (str.equals("")) {
 							jopt.erro("");
@@ -102,6 +125,7 @@ public class Main {
 				}
 				default: jopt.erro("[0-9]");
 			}
+			opcao = -1;
 		}
 
 	}

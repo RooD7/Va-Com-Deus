@@ -1,4 +1,4 @@
-//package mainPackage;
+package mainPackage;
 
 import javax.swing.*;
 
@@ -17,8 +17,7 @@ public class JOption {
 	}
 
 	public int showJOptionMenu() {
-		int opcao = 0;
-		opcao = Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir todos os voos\n" +
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir todos os voos\n" +
 				"2 - Exibir informações dos voos do usuario\n" + // exibir info voo do usuario
 				"3 - Alterar dados\n" + // usuario, voo ou aviao
 				"4 - Excluir dados\n" + // usuario, voo ou aviao
@@ -28,17 +27,33 @@ public class JOption {
 				"8 - Exibir lucro\n" +
 				"9 - Listar passageiros do voo\n" +
 				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
-		return opcao;
+		
 	}
 
+	public int showJOptionSubMenu5Tipo() {
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastrar Avião\n" +
+				"2 - Cadastrar Voo\n" +
+				"3 - Cadastrar Passageiro\n" +
+				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
+	}
+	
+	public int showJOptionSubMenu5() {
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastro via Tela\n" +
+				"2 - Cadastro via arquivo JSON\n", JOptionPane.QUESTION_MESSAGE));
+	}
+	
+	public String showJOptionSubMenu5Str() {
+		return JOptionPane.showInputDialog(null,"Digite o nome do arquivo:", JOptionPane.QUESTION_MESSAGE);
+	}
+	
 	public int inputJOptionInteger(String str) {
-			return Integer.parseInt(JOptionPane.showInputDialog(null,str, JOptionPane.QUESTION_MESSAGE);
+			return Integer.parseInt(JOptionPane.showInputDialog(null,str, JOptionPane.QUESTION_MESSAGE));
 	}
 
-	public void erro(String valor) {
-		if(valor.equals(""))
+	public void erro() {
 			JOptionPane.showMessageDialog(null,"Valor inserido inválido.\n","Valor Inválido",JOptionPane.ERROR_MESSAGE);
-		else
-			JOptionPane.showMessageDialog(null,"Valor inserido invalido.\nValor esperado: "+valor,"Valor Invalido",JOptionPane.ERROR_MESSAGE);
+	}
+	public void erro(String valor) {
+		JOptionPane.showMessageDialog(null,"Valor inserido inválido.\nValor esperado: "+valor,"Valor Inválido",JOptionPane.ERROR_MESSAGE);
 	}
 }

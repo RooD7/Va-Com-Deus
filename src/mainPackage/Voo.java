@@ -1,4 +1,4 @@
-//package mainPackage;
+package mainPackage;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,10 +15,10 @@ public class Voo {
 	private String destino;
 	private String origem;
 
-	private Passageiro[] listaPsg = new Passageiro[1000];
+	private Passageiro[] listPsg = new Passageiro[1000];
 	private int qntdePsg;
 
-	public Voo(Aviao aviao) {
+	public Voo() {
 		infoVoo = "";
 		numVoo = 0;
 		compAerea = "";
@@ -27,7 +27,21 @@ public class Voo {
 		statusVoo = "";
 		destino = "";
 		origem = "";
-		listaPsg = null;
+		//listPsg = null;
+		qntdePsg = 0;
+	}
+	
+	public Voo(Aviao aviao) {
+		infoVoo = "";
+		numVoo = 0;
+		compAerea = "";
+		this.aviao = aviao;
+		dataVoo = null;
+		horarioVoo = null;
+		statusVoo = "";
+		destino = "";
+		origem = "";
+		listPsg = null;
 		qntdePsg = 0;
 	}
 
@@ -94,11 +108,11 @@ public class Voo {
 		this.origem = origem;
 	}
 
-	public Passageiro[] getListaPsg() {
-		return listaPsg;
+	public Passageiro[] getListPsg() {
+		return listPsg;
 	}
-	public void setListaPsg(Passageiro[] listaPsg) {
-		this.listaPsg = listaPsg;
+	public void setListPsg(Passageiro[] listPsg) {
+		this.listPsg = listPsg;
 	}
 
 	public int getQntdePsg() {
@@ -108,6 +122,29 @@ public class Voo {
 		this.qntdePsg = qntdePsg;
 	}
 
+	// Cadastra o passageiro do Voo
+	public void cadastrarPassageiro(String nome, String telef, String email, String cpf, Date dataNasc) {
+
+		// Adiciona o novo passageiro a lista de Passageiros
+		this.listPsg[this.qntdePsg] = new Passageiro();
+
+		// Adiciona o novo passageiro a lista de Passageiros
+		this.listPsg[this.qntdePsg].setNome(nome);
+		this.listPsg[this.qntdePsg].setCpf(cpf);
+		this.listPsg[this.qntdePsg].setTelef(telef);
+		this.listPsg[this.qntdePsg].setEmail(email);
+		this.listPsg[this.qntdePsg].setDataNasc(dataNasc);
+
+		//Atualiza o tamanho da lista
+		this.qntdePsg++;
+	}
+
+	public void cadastrarPassageiro(Passageiro passageiro) {
+		// Adiciona o novo passageiro a lista de Passageiros
+		this.listPsg[this.qntdePsg] = passageiro;
+		//Atualiza o tamanho da lista
+		this.qntdePsg++;
+	}
 
 	public String imprime() {
 
@@ -117,13 +154,13 @@ public class Voo {
 				"Info Voo: "+getInfoVoo()+"\n"+
 				"Numero Voo: "+getNumVoo()+"\n"+
 				"Companhia Aerea: "+getCompAerea()+"\n"+
-				"Aviao: "+getAviao().getModelo()+"\n"+
+				//"Aviao: "+getAviao().getModelo()+"\n"+
 				"Data: "+formData.format(getDataVoo())+"\n"+
 				"Horario Voo: "+ formHora.format(getHorarioVoo())+"\n"+
 				"Status Voo: "+getStatusVoo()+"\n"+
 				"Destino: "+getDestino()+"\n"+
 				"Origem: "+getOrigem()+"\n"+
-				"ListaPsg: "+getListaPsg()+"\n"+
+				"ListaPsg: "+getListPsg()+"\n"+
 				"Quantidade Psg: "+getQntdePsg()+"\n";
 	}
 
