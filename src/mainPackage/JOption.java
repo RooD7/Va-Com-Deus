@@ -1,5 +1,7 @@
 package mainPackage;
 
+import java.text.SimpleDateFormat;
+
 import javax.swing.*;
 
 public class JOption {
@@ -18,10 +20,10 @@ public class JOption {
 
 	public int showJOptionMenu() {
 		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir todos os voos\n" +
-				"2 - Exibir informações dos voos do usuario\n" + // exibir info voo do usuario
+				"2 - Exibir informacoes dos voos do usuario\n" + // exibir info voo do usuario
 				"3 - Alterar dados\n" + // usuario, voo ou aviao
 				"4 - Excluir dados\n" + // usuario, voo ou aviao
-				"5 - Cadastrar/Importar novas informações\n" + // usuario, voo ou aviao
+				"5 - Cadastrar/Importar novas informacoes\n" + // usuario, voo ou aviao
 				"6 - Cadastrar/Exportar voos\n" + // em arquivos json
 				"7 - Exibir total de voos por companhia\n" +
 				"8 - Exibir lucro\n" +
@@ -31,7 +33,7 @@ public class JOption {
 	}
 
 	public int showJOptionSubMenu5Tipo() {
-		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastrar Avião\n" +
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastrar Aviao\n" +
 				"2 - Cadastrar Voo\n" +
 				"3 - Cadastrar Passageiro\n" +
 				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
@@ -39,7 +41,7 @@ public class JOption {
 	
 	public int showJOptionSubMenu5() {
 		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastro via Tela\n" +
-				"2 - Cadastro via arquivo JSON\n", JOptionPane.QUESTION_MESSAGE));
+				"2 - Cadastro via arquivo JSON\n"+"0 - Voltar\n", JOptionPane.QUESTION_MESSAGE));
 	}
 	
 	public String showJOptionSubMenu5Str() {
@@ -51,9 +53,90 @@ public class JOption {
 	}
 
 	public void erro() {
-			JOptionPane.showMessageDialog(null,"Valor inserido inválido.\n","Valor Inválido",JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"Valor inserido invalido.\n","Valor Invalido",JOptionPane.ERROR_MESSAGE);
 	}
 	public void erro(String valor) {
-		JOptionPane.showMessageDialog(null,"Valor inserido inválido.\nValor esperado: "+valor,"Valor Inválido",JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null,"Valor inserido invalido.\nValor esperado: "+valor,"Valor Invalido",JOptionPane.ERROR_MESSAGE);
+	}
+
+	public int showJOptionSubMenuCadastroViaTela() {
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastrar Aviao\n" +
+				"2 - Cadastrar Voo\n" +
+				"3 - Cadastrar Passageiro\n" +
+				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
+	}
+
+	public void showJOptionSair() throws IllegalStateException {
+		// display the showOptionDialog
+		Object[] options = { "OK", "Cancelar" };
+		int choice = JOptionPane.showOptionDialog(null, 
+		    "Voce realmente quer sair?", 
+		    "Sair?", 
+		    JOptionPane.YES_NO_OPTION, 
+		    JOptionPane.QUESTION_MESSAGE, 
+		    null, 
+		    options, 
+		    options[0]);
+
+		// interpret the user's choice
+		if (choice == JOptionPane.YES_OPTION)
+		{
+		  System.exit(0);
+		}
+	}
+
+	public void showJOptionPassageiroIfoVoo(Companhia[] listComp, String cpf) {
+		/*
+		 * exibir nome passageiro
+		 * exibir num voo do passageiro
+		 * exibir data e hr do voo do passageiro
+		 * */
+		// TODO Auto-generated method stub
+		int i,j,k;
+		
+		Voo[] listVoo = null;
+		Passageiro[] listPsg = null;
+
+		Passageiro passageiro = null;
+		Voo voo = null;
+		
+		for (i = 0; i < listComp.length; i++) {
+			listVoo = listComp[i].getListVoo();
+			for (j = 0; j < listVoo.length; j++) {
+				listPsg = listVoo[j].getListPsg();
+				for (k = 0; k < listPsg.length; k++) {
+					if (listPsg[k].getCpf().equals(cpf)) {
+						passageiro = listPsg[k];
+						voo = listVoo[j];
+					}
+				}
+			}
+		}
+		
+		if (passageiro == null) {
+			JOptionPane.showMessageDialog(null,"Passageiro nao encontrado.\n","Valor Invalido",JOptionPane.ERROR_MESSAGE);
+		}
+		
+		/*
+		 * Busca voo passageiro
+		 * */
+
+		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
+		
+		JOptionPane.showMessageDialog(null, "Nome Passageiro: "+ passageiro.getNome()+"\n"+
+		"Numero Voo: "+voo.getNumVoo()+"\n"+
+		"Companhia Aerea: "+voo.getCompAerea()+"\n"+
+		"Data: "+formData.format(voo.getDataVoo())+"\n"+
+		"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
+		"Status Voo: "+voo.getStatusVoo()+"\n"+
+		"Destino: "+voo.getDestino()+"\n"+
+		"Origem: "+voo.getOrigem()+"\n");
+		
+	}
+
+	public String inputJOptionCPF() {
+		String str = JOptionPane.showInputDialog("Digite o CPF do passageiro desejado: ");
+		return str;
 	}
 }

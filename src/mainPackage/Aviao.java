@@ -62,7 +62,7 @@ public class Aviao {
 	}
 
 	public String imprime(){
-		return "Avião\n"+
+		return "Aviao\n"+
 				"Modelo: "+getModelo()+"\n"+
 				"Autonomia: "+getAutonomiaVoo()+"\n"+
 				"Altura: "+getAltura()+"\n"+

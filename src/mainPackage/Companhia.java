@@ -64,7 +64,8 @@ public class Companhia {
 	
 	// Retorna Ultimo Voo Cadastrado
 		public Voo getUltimoVoo() {
-			if(this.tamListAviao != 0)
+			//System.out.println(this.tamListAviao);
+			if(this.tamListVoo != 0)
 				return this.listVoo[this.tamListVoo-1];
 			else
 				return null;
@@ -90,6 +91,7 @@ public class Companhia {
 	// Cadastra o aviao da Companhia Aerea
 	public void cadastrarAviao(Aviao aviao) {
 		// Adiciona o novo aviao a lista de avioes
+		System.out.println(this.tamListAviao);
 		this.listAviao[this.tamListAviao] = aviao;
 		//Atualiza o tamanho da lista
 		this.tamListAviao++;
@@ -126,6 +128,10 @@ public class Companhia {
 		//Atualiza o tamanho da lista
 		this.tamListVoo++;
 	}
+	
+	public int getTamListAviao() {
+		return this.tamListAviao;
+	}
 
 	// Exporta os dados da Companhia Aerea para um arquivo Json
 	public void exportarVoo() {
@@ -134,7 +140,7 @@ public class Companhia {
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
 		int i;
 
-		System.out.print("Tam "+this.tamListVoo+"\n");
+		//System.out.print("Tam "+this.tamListVoo+"\n");
 		for (i = 0; i <= this.tamListVoo; i++) {
 			System.out.print("Companhia "+getNome()+" --- Voo "+i+"\n"+
 						"Info Voo: "+listVoo[i].getInfoVoo()+"\n"+

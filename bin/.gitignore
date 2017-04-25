@@ -1,2 +1,5 @@
-Rascunho.txt
-bin/mainPackage/*.class
+/.classpath
+/.project
+/Va-Com-Deus.eml
+/Va-Com-Deus.iml
+/mainPackage/

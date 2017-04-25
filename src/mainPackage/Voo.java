@@ -27,10 +27,16 @@ public class Voo {
 		statusVoo = "";
 		destino = "";
 		origem = "";
-		//listPsg = null;
+		inicializaLista();
 		qntdePsg = 0;
 	}
 	
+	private void inicializaLista() {
+		for (int i = 0; i < 1000; i++) {
+			this.listPsg[i] = null;
+		}
+	}
+
 	public Voo(Aviao aviao) {
 		infoVoo = "";
 		numVoo = 0;
@@ -41,7 +47,7 @@ public class Voo {
 		statusVoo = "";
 		destino = "";
 		origem = "";
-		listPsg = null;
+		inicializaLista();
 		qntdePsg = 0;
 	}
 

@@ -18,23 +18,23 @@ import java.text.SimpleDateFormat;
     }
     
     public Companhia getCompanhia(String nome) {
-    	System.out.println("aki");
+    	//System.out.println("aki");
     	for (int i = 0; i < this.tamListComp; i++) {
-    		System.out.print("GetNome: "+this.listComp[i].getNome()+"\n");
+    		//System.out.print("GetNome: "+this.listComp[i].getNome()+"\n");
     		if(this.listComp[i].getNome().equals(nome)) {
     			return this.listComp[i];
     		}
-    		System.out.println("aki");
+    		//System.out.println("aki");
     	}
-    	System.out.println("aki3");
+    	//System.out.println("aki3");
     	cadastrarCompanhia(nome);
     	return getUltimaCompanhia();
     }
     
     // Retorna Ultimo Aviao Cadastrado
  	public Companhia getUltimaCompanhia() {
- 		System.out.print("tams: "+this.tamListComp+"\n");
- 		System.out.println("Ult: "+this.listComp[this.tamListComp-1].getNome()+"\n");
+ 		//System.out.print("tams: "+this.tamListComp+"\n");
+ 		//System.out.println("Ult: "+this.listComp[this.tamListComp-1].getNome()+"\n");
  		return this.listComp[this.tamListComp-1];
  	}
 
@@ -44,10 +44,10 @@ import java.text.SimpleDateFormat;
 
  	// Cadastra Companhia Aerea
 	public void cadastrarCompanhia(String nome) {
-		
+		int i ;
 		// Adiciona o novo voo a lista de voo's
 		// Encontra uma posicao vazia na Lista de Voo's
-		for (int i = 0; i < this.listComp.length; i++) {
+		for ( i = 0; i < this.listComp.length; i++) {
 			if (this.listComp[i] == null) {
 
 				// Cria uma nova Companhia
