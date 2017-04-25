@@ -22,7 +22,7 @@ public class JOption {
 	public int showJOptionMenu() {
 		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir voos do dia: \n" +
 				"2 - Exibir informacoes dos voos do usuario\n" + // exibir info voo do usuario #PARCIALMENTE OK - SO FAZER MAIS TESTES
-				"3 - Alterar dados\n" + // usuario, voo ou aviao
+				"3 - Alterar dados\n" + // usuario, voo ou aviao ##PROXIMA ETAPA
 				"4 - Excluir dados\n" + // usuario, voo ou aviao
 				"5 - Cadastrar/Importar novas informacoes\n" + // usuario, voo ou aviao #PARCIALMENTE OK - SO FAZER MAIS TESTES
 				"6 - Cadastrar/Exportar voos\n" + // em arquivos json
