@@ -1,31 +1,30 @@
 package mainPackage;
 import java.util.Date;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.text.SimpleDateFormat;
 
  public class Aeroporto {
 
- 	private Companhia[] listComp = new Companhia[100];
+ 	private ArrayList<Companhia> listComp;
  	private int tamListComp;
 
  	public Aeroporto() {
- 		//this.listComp = null;
- 		this.tamListComp = 0;
+ 		this.listComp = new ArrayList<Companhia>();
  	}
 
-    public Companhia[] getListCompanhia() {
+    public ArrayList<Companhia> getListCompanhia() {
     	return this.listComp;
     }
     
     public Companhia getCompanhia(String nome) {
     	//System.out.println("aki");
-    	for (int i = 0; i < this.tamListComp; i++) {
-    		//System.out.print("GetNome: "+this.listComp[i].getNome()+"\n");
-    		if(this.listComp[i].getNome().equals(nome)) {
-    			return this.listComp[i];
-    		}
-    		//System.out.println("aki");
-    	}
+    	for (Companhia c : this.listComp) {
+			if(c.getNome().equals(nome)) {
+				return c;
+			}
+		}
+    	
     	//System.out.println("aki3");
     	cadastrarCompanhia(nome);
     	return getUltimaCompanhia();
@@ -33,9 +32,12 @@ import java.text.SimpleDateFormat;
     
     // Retorna Ultimo Aviao Cadastrado
  	public Companhia getUltimaCompanhia() {
+ 		if (!(this.listComp.isEmpty())){
+ 			return this.listComp.get(listComp.size()-1);
+ 		}else return null;
  		//System.out.print("tams: "+this.tamListComp+"\n");
  		//System.out.println("Ult: "+this.listComp[this.tamListComp-1].getNome()+"\n");
- 		return this.listComp[this.tamListComp-1];
+ 		
  	}
 
     public int getTamListComp() {
@@ -44,20 +46,8 @@ import java.text.SimpleDateFormat;
 
  	// Cadastra Companhia Aerea
 	public void cadastrarCompanhia(String nome) {
-		int i ;
-		// Adiciona o novo voo a lista de voo's
-		// Encontra uma posicao vazia na Lista de Voo's
-		for ( i = 0; i < this.listComp.length; i++) {
-			if (this.listComp[i] == null) {
-
-				// Cria uma nova Companhia
-				this.listComp[i] = new Companhia(nome);
-
-				//Atualiza o tamanho da lista
-				this.tamListComp++;
-				break;
-			}
-		}
+		Companhia c = new Companhia(nome);
+		this.listComp.add(c);
 	}
 
 	//Voo's Mes cada Companhia realizou
@@ -85,12 +75,12 @@ import java.text.SimpleDateFormat;
 		System.out.print("Data Inicial: "+dataInicial.toString()+"\tData Final: "+dataFinal.toString()+"\n");
 		
 		//percorre a lista de voos
-		Voo[] lista = comp.getListVoo();
-		for (int i=0; lista[i] != null; i++) {
-			dataVoo = lista[i].getDataVoo();
+		ArrayList<Voo> lista = comp.getListVoo();
+		for (Voo voo : lista) {
+			dataVoo = voo.getDataVoo();
 			//voo's que pertence aquele mes(dataAtual- 1 mes)
 			if(dataVoo.after(dataInicial) && dataVoo.before(dataFinal)) {
-				if((lista[i].getInfoVoo() == "INCLUIDO") && (lista[i].getStatusVoo() == "CONFIRMADO")) {
+				if((voo.getInfoVoo() == "INCLUIDO") && (voo.getStatusVoo() == "CONFIRMADO")) {
 					qntdeVooMes++;
 				}
 			}

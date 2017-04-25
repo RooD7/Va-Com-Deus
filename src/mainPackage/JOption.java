@@ -1,6 +1,7 @@
 package mainPackage;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -19,11 +20,11 @@ public class JOption {
 	}
 
 	public int showJOptionMenu() {
-		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir todos os voos\n" +
-				"2 - Exibir informacoes dos voos do usuario\n" + // exibir info voo do usuario
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Exibir voos do dia: \n" +
+				"2 - Exibir informacoes dos voos do usuario\n" + // exibir info voo do usuario #PARCIALMENTE OK - SO FAZER MAIS TESTES
 				"3 - Alterar dados\n" + // usuario, voo ou aviao
 				"4 - Excluir dados\n" + // usuario, voo ou aviao
-				"5 - Cadastrar/Importar novas informacoes\n" + // usuario, voo ou aviao
+				"5 - Cadastrar/Importar novas informacoes\n" + // usuario, voo ou aviao #PARCIALMENTE OK - SO FAZER MAIS TESTES
 				"6 - Cadastrar/Exportar voos\n" + // em arquivos json
 				"7 - Exibir total de voos por companhia\n" +
 				"8 - Exibir lucro\n" +
@@ -85,37 +86,44 @@ public class JOption {
 		}
 	}
 
-	public void showJOptionPassageiroIfoVoo(Companhia[] listComp, String cpf) {
+	public void showJOptionPassageiroIfoVoo(ArrayList<Companhia> listComp, String cpf) {
 		/*
 		 * exibir nome passageiro
 		 * exibir num voo do passageiro
 		 * exibir data e hr do voo do passageiro
 		 * */
 		// TODO Auto-generated method stub
-		int i,j,k;
 		
-		Voo[] listVoo = null;
-		Passageiro[] listPsg = null;
+		ArrayList<Voo> listVoo;
+		ArrayList<Passageiro> listPsg;
 
 		Passageiro passageiro = null;
 		Voo voo = null;
 		
-		for (i = 0; i < listComp.length; i++) {
-			listVoo = listComp[i].getListVoo();
-			for (j = 0; j < listVoo.length; j++) {
-				listPsg = listVoo[j].getListPsg();
-				for (k = 0; k < listPsg.length; k++) {
-					if (listPsg[k].getCpf().equals(cpf)) {
-						passageiro = listPsg[k];
-						voo = listVoo[j];
+		for (Companhia c : listComp) {
+			listVoo = c.getListVoo();
+			listVoo.toString();
+			for (Voo v : listVoo) {
+				listPsg = v.getListPsg();
+				listPsg.toString();
+				for (Passageiro p : listPsg) {
+					if(p.getCpf().equals(cpf)) {
+						passageiro = p;
+						voo = v;
+						exibeTelaCelular(p, c.getUltimoVoo());
+						break;
 					}
 				}
 			}
 		}
-		
 		if (passageiro == null) {
 			JOptionPane.showMessageDialog(null,"Passageiro nao encontrado.\n","Valor Invalido",JOptionPane.ERROR_MESSAGE);
 		}
+		
+	}
+
+	private void exibeTelaCelular(Passageiro passageiro, Voo voo) {
+		
 		
 		/*
 		 * Busca voo passageiro
@@ -123,20 +131,28 @@ public class JOption {
 
 		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
 		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
-		
-		JOptionPane.showMessageDialog(null, "Nome Passageiro: "+ passageiro.getNome()+"\n"+
-		"Numero Voo: "+voo.getNumVoo()+"\n"+
-		"Companhia Aerea: "+voo.getCompAerea()+"\n"+
-		"Data: "+formData.format(voo.getDataVoo())+"\n"+
-		"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
-		"Status Voo: "+voo.getStatusVoo()+"\n"+
-		"Destino: "+voo.getDestino()+"\n"+
-		"Origem: "+voo.getOrigem()+"\n");
+		if(!voo.equals(null)){
+			JOptionPane.showMessageDialog(null, "Nome Passageiro: "+ passageiro.getNome()+"\n"+
+					"Numero Voo: "+voo.getNumVoo()+"\n"+
+					"Companhia Aerea: "+voo.getCompAerea()+"\n"+
+					"Data: "+formData.format(voo.getDataVoo())+"\n"+
+					"Horario Voo: "+ formHora.format(voo.getHorarioVoo())+"\n"+
+					"Status Voo: "+voo.getStatusVoo()+"\n"+
+					"Destino: "+voo.getDestino()+"\n"+
+					"Origem: "+voo.getOrigem()+"\n");
+		}else{
+			System.out.println("voo nulo"); // exibir mensagem de erro;
+		}
 		
 	}
 
 	public String inputJOptionCPF() {
 		String str = JOptionPane.showInputDialog("Digite o CPF do passageiro desejado: ");
 		return str;
+	}
+
+	public void showJOptionTodosVoos() {
+		// TODO Auto-generated method stub
+		
 	}
 }

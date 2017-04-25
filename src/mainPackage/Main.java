@@ -25,7 +25,7 @@ public class Main {
 		
 		Aeroporto vaComDeus = new Aeroporto();
 		vaComDeus.cadastrarCompanhia("Do Chao Nao Passa!");
-		nameComp = vaComDeus.getListCompanhia()[0].getNome();
+		//nameComp = vaComDeus.getListCompanhia()[0].getNome();
 		
 		Aviao aviao = null;
 		Voo voo = null;
@@ -41,6 +41,7 @@ public class Main {
 			switch (opcao) {
 				//Exibir todos os voos
 				case 1: {
+					jopt.showJOptionTodosVoos();
 					break;
 				}
 				// Exibir informacoes dos voos do usuario
@@ -70,7 +71,7 @@ public class Main {
 									aviao = new Aviao();
 									nameInputFile = "entrada-aviao.json";	//apagar
 									aviao = json.getJsonAviao(nameInputFile, aviao);
-									nameComp = vaComDeus.getUltimaCompanhia().getNome();
+									//nameComp = vaComDeus.getUltimaCompanhia().getNome();
 									vaComDeus.getUltimaCompanhia().cadastrarAviao(aviao);
 									
 									
@@ -83,17 +84,9 @@ public class Main {
 									voo = json.getJsonVoo(nameInputFile, voo, aviao);
 									//System.out.println("Companhia: "+voo.getCompAerea()+"\n\n");
 									vaComDeus.getCompanhia(voo.getCompAerea()); // se a comp no existe, ele cria
-									
 									vaComDeus.getUltimaCompanhia().cadastrarVoo(voo, aviao);
 									
-									int t = vaComDeus.getUltimaCompanhia().getTamListAviao();
-
-									//System.out.println("List Aviao: "+t);
-									//System.out.println("Nome Companhia: "+vaComDeus.getUltimaCompanhia().getNome());
-									
-
-									vaComDeus.getCompanhia(voo.getCompAerea()).cadastrarVoo(voo, vaComDeus.getCompanhia(voo.getCompAerea()).getUltimoAviao());
-									jopt.showJOptionVoo(voo); //apagar
+									//jopt.showJOptionVoo(voo); //apagar
 									break;
 								case 3:	//passageiro
 									passageiro = new Passageiro();

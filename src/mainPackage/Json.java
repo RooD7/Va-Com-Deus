@@ -57,8 +57,6 @@ public class Json {
 			voo.setInfoVoo((String) jsonObject.get("InfoVoo"));
 			voo.setNumVoo(Integer.parseInt((String) jsonObject.get("NumVoo")));
 			voo.setCompAerea((String) jsonObject.get("CompAerea"));
-			//voo.setListaPsg((Passageiro[]) jsonObject.get("Lista Psg"));
-			voo.setQntdePsg(Integer.parseInt((String) jsonObject.get("Quantidade Psg")));
 			voo.setAviao(aviao);
 
 			Date data = new Date();
