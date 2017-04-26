@@ -37,6 +37,13 @@ public class JOption {
 		
 	}
 
+	public int showJOptionSubMenu4() {
+		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Excluir Aviao\n" +
+				"2 - Excluir Voo\n" +
+				"3 - Excluir Passageiro\n" +
+				"0 - Sair","Menu", JOptionPane.QUESTION_MESSAGE));
+	}
+	
 	public int showJOptionSubMenu5Tipo() {
 		return Integer.parseInt(JOptionPane.showInputDialog(null,"1 - Cadastrar Aviao\n" +
 				"2 - Cadastrar Voo\n" +

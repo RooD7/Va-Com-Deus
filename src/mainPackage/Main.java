@@ -20,6 +20,7 @@ public class Main {
 		String nameInputFile;
 		String nameComp;
 		int opcao = -1;
+		int opcao4 = -1;
 		int opcao5 = -1; //MUDAR
 		boolean inputFile;
 		
@@ -67,6 +68,46 @@ public class Main {
 				}
 				// Excluir dados
 				case 4: {
+					opcao4 = jopt.showJOptionSubMenu4();
+					switch (opcao4) {
+						case 1: { // aviao
+							int num = jopt.inputJOptionInteger("Digite o modelo: ");
+							for (Companhia c : vaComDeus.getListCompanhia()) {
+								for (Aviao v : c.getListAviao()) {
+									if(v.getModelo().equals(num)) {
+										c.getListAviao().remove(num);
+										break;
+									}
+								}
+							}
+							break;
+						}
+						case 2: { // voo
+							int num = jopt.inputJOptionInteger("Digite o número do Voo: ");
+							for (Companhia c : vaComDeus.getListCompanhia()) {
+								if(c.getVoo(num) != null) {
+									c.getListVoo().remove(num);
+									break;
+								}
+							}
+							break;
+						}
+						case 3: { // passageiro
+							int num = jopt.inputJOptionInteger("Digite o cpf do passageiro: ");
+							for (Companhia c : vaComDeus.getListCompanhia()) {
+								for (Voo v : c.getListVoo()) {
+									for (Passageiro p : v.getListPsg()) {
+										if(p.getCpf().equals(num)) {
+											v.getListPsg().remove(num);
+											break;
+										}
+									}
+								}
+							}
+							break;
+						}
+						default: jopt.erro();
+					}
 					break;
 				}
 				// Cadastrar/Importar novas informacoes
@@ -117,6 +158,7 @@ public class Main {
 									}
 									
 									break;
+								default: jopt.erro();
 							}
 							opcao5 = -1;
 						}else if (opcao5 == 1) {
