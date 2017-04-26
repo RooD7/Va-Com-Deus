@@ -112,8 +112,12 @@ public class Voo {
 	public ArrayList<Passageiro> getListPsg() {
 		return listPsg;
 	}
+	
 	public void setListPsg(ArrayList<Passageiro> listPsg) {
-		this.listPsg = listPsg;
+		if(listPsg == null)
+			this.listPsg = new ArrayList<Passageiro>();
+		else
+			this.listPsg = listPsg;
 	}
 
 

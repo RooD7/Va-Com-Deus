@@ -1,6 +1,7 @@
 package mainPackage;
 
 import javax.swing.*;
+import java.util.*;
 import java.text.SimpleDateFormat;
 
 public class Main {
@@ -31,7 +32,17 @@ public class Main {
 		Voo voo = null;
 		Passageiro passageiro = null;
 
+		// Captura Mes atual
+		Date dataAtual = new Date();
+		Date dataFinalMes = vaComDeus.ultimoDiaMes(dataAtual);
+				
 		while (opcao != 0){
+			if(dataAtual.equals(dataFinalMes)) {
+				// RESETA DADOS
+				vaComDeus = new Aeroporto();
+				jopt.showJOptionResultado("Banco de dados", "Banco de dados foi resetado!");
+			}
+			
 			//System.out.println("OPCAO5: "+opcao5);
 			opcao = jopt.showJOptionMenu();
 			//System.out.println("OPCAO: "+opcao);
@@ -84,7 +95,12 @@ public class Main {
 									voo = json.getJsonVoo(nameInputFile, voo, aviao);
 									//System.out.println("Companhia: "+voo.getCompAerea()+"\n\n");
 									vaComDeus.getCompanhia(voo.getCompAerea()); // se a comp no existe, ele cria
-									vaComDeus.getUltimaCompanhia().cadastrarVoo(voo, aviao);
+									
+									if(vaComDeus.passouLimiteVoo30Min()) {
+										jopt.erro("Limite de voo's atingido num intervalo de 30 min.");
+									}
+									else
+										vaComDeus.getUltimaCompanhia().cadastrarVoo(voo, aviao);
 									
 									//jopt.showJOptionVoo(voo); //apagar
 									break;
@@ -104,7 +120,73 @@ public class Main {
 							}
 							opcao5 = -1;
 						}else if (opcao5 == 1) {
-							jopt.showJOptionSubMenuCadastroViaTela(); // criar menu pra cadastro via tela
+							opcao5 = jopt.showJOptionSubMenuCadastroViaTela(); // criar menu pra cadastro via tela
+							
+							switch (opcao5) {
+								case 1:	{//aviao
+									
+									String modelo = JOptionPane.showInputDialog("Digite o modelo: ");									
+									Double autonomiaVoo = Double.parseDouble(JOptionPane.showInputDialog("Digite a autonomia de voo: "));
+									Double altura = Double.parseDouble(JOptionPane.showInputDialog("Digite a altura: "));
+									Double enverAsa = Double.parseDouble(JOptionPane.showInputDialog("Digite a envergadura da asa: "));
+									Double comprimento = Double.parseDouble(JOptionPane.showInputDialog("Digite o comprimento: "));
+									Double capacCarga = Double.parseDouble(JOptionPane.showInputDialog("Digite a capacidade de carga: "));
+									
+									vaComDeus.getUltimaCompanhia().cadastrarAviao(modelo, autonomiaVoo, altura, enverAsa, comprimento, capacCarga);
+									
+									break;
+								}
+								case 2:	{//voo
+									
+									String infoVoo = JOptionPane.showInputDialog("Digite a informação do Voo: ");									
+									int numVo = Integer.parseInt((JOptionPane.showInputDialog("Digite o número do Voo: ")));
+									String compAer = JOptionPane.showInputDialog("Digite a companhia aerea: ");
+									Date dataV = formData.parse(JOptionPane.showInputDialog("Digite a data: "));
+									Date horaV = formHora.parse(JOptionPane.showInputDialog("Digite o horário: "));
+									String statusVoo = JOptionPane.showInputDialog("Digite o status do Voo: ");
+									String origem = JOptionPane.showInputDialog("Digite a origem: ");
+									String destino = JOptionPane.showInputDialog("Digite o destino: ");
+									
+									if(vaComDeus.passouLimiteVoo30Min()) {
+										jopt.erro("Limite de voo's atingido num intervalo de 30 min.");
+									} 
+									else
+										vaComDeus.getUltimaCompanhia().cadastrarVoo(infoVoo, numVo, compAer, dataV, horaV, statusVoo, origem, destino);
+									
+									break;
+								}
+								case 3:	{	// Passageiro
+									String nom = JOptionPane.showInputDialog("Digite o nome: ");
+									String tel = JOptionPane.showInputDialog("Digite o telefone: ");
+									String email = "";
+									String cpf = "";
+									boolean ok;
+									do {
+										email = JOptionPane.showInputDialog("Digite o e-mail: ");
+										ok = vaComDeus.getUltimaCompanhia().validarEmail(email); 
+										if (!ok) {
+											jopt.erro("");
+										}
+									} while(!ok);
+						
+									do {
+										cpf = JOptionPane.showInputDialog("Digite o cpf: ");
+										ok = vaComDeus.getUltimaCompanhia().validarCpf(cpf); 
+										if (!ok) {
+											jopt.erro("");
+										}
+									} while(!ok);
+									Date dataN = formData.parse(JOptionPane.showInputDialog("Digite a data de nascimento: "));
+									
+									vaComDeus.getUltimaCompanhia().getUltimoVoo().cadastrarPassageiro(nom, tel, email, cpf, dataN);
+									break;	
+								}
+								case 0:	{ //sair
+									break;
+								}
+								default: jopt.erro();
+							}
+							opcao5 = -1;
 						}else if (opcao5 == 0){
 							break;
 						}else jopt.erro();
@@ -118,12 +200,24 @@ public class Main {
 				}
 				// Exibir total de voos por companhia
 				case 7: {
-					// (int) vaComDeus.voosMesCompanhia(Companhia comp, int numMes)
+					String str = "";
+					for (Companhia c : vaComDeus.getListCompanhia()) {
+						str += "Companhia: "+c.getNome()+
+								"\tNúmero de voo's: "+ vaComDeus.voosMesCompanhia(c)+"\n";
+					}
+					jopt.showJOptionResultado("Voo's por companhia no mês", str);
 					break;
 				}
 				// Exibir lucro
 				case 8: {
 					// (double) lucroVoo(Voo voo)
+					Double lucro = 0.0;
+					for (Companhia c : vaComDeus.getListCompanhia()) {
+						for (Voo v : c.getListVoo()) {
+							lucro += vaComDeus.lucroVoo(v);
+						}
+					}
+					jopt.showJOptionResultado("Lucro Aeroporto", "R$ "+lucro+"\n");
 					break;
 				}
 				//Listar passageiros do voo
@@ -133,7 +227,7 @@ public class Main {
 						//Recebe o numero do voo
 						int num = jopt.inputJOptionInteger("Digite o numero do voo [0-100]\n");
 						//Busca a lista de passageiros pelo num
-						//str = vaComDeus.listPsgPorNumVoo(num);
+						str = vaComDeus.listPsgPorNumVoo(num);
 						//Nao encontrou o voo
 						if (str.equals("")) {
 							jopt.erro("");

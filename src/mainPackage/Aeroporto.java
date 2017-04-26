@@ -50,8 +50,20 @@ import java.text.SimpleDateFormat;
 		this.listComp.add(c);
 	}
 
+	public Date ultimoDiaMes(Date data) {
+		// calendar recebe data atual
+		Calendar c = Calendar.getInstance();
+		c.setTime(data);
+
+		// (29-30-31)/**/20**
+		c.set(Calendar.MONTH, c.get(Calendar.MONTH)+1);
+		c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) - 1);
+		
+		return c.getTime(); 
+	}
+	
 	//Voo's Mes cada Companhia realizou
-	public int voosMesCompanhia(Companhia comp, int numMes) {
+	public int voosMesCompanhia(Companhia comp) {
 		Calendar c = Calendar.getInstance();
 		Date dataAtual = new Date();
 		Date dataInicial;
@@ -62,15 +74,12 @@ import java.text.SimpleDateFormat;
 		// calendar recebe data atual
 		c.setTime(dataAtual);
 		
-		// dataInicial = 01/numMes/20**
+		// dataInicial = 01/**/20**
 		c.set(Calendar.DAY_OF_MONTH, 1);
-		c.set(Calendar.MONTH, numMes);
 		dataInicial = c.getTime();
 
-		// dataFinal = (29-30-31)/numMes/20**
-		c.set(Calendar.MONTH, numMes+1);
-		c.set(Calendar.DAY_OF_MONTH, c.get(Calendar.DAY_OF_MONTH) - 1);
-		dataFinal = c.getTime();
+		// dataFinal = (29-30-31)/**/20**
+		dataFinal = ultimoDiaMes(dataAtual);
 
 		System.out.print("Data Inicial: "+dataInicial.toString()+"\tData Final: "+dataFinal.toString()+"\n");
 		
@@ -102,43 +111,37 @@ import java.text.SimpleDateFormat;
 	}
 
 	//Tratar limite de 4 decolagens a cada 30 min
-	/*
-	public boolean limiteVoo30Min() {
-		SimpleDateFormat formData = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat formHora = new SimpleDateFormat("HH:mm");
+	
+	public boolean passouLimiteVoo30Min() {
 
-		Companhia[] comps = getCompanhia();
-		Date dataAtual = new Date();
-		int tamComps = getTamListComp();
+		Date horaAtual = new Date();
+		Date hora30Depois =  new Date(horaAtual.getTime() + 30 * 60 * 1000);
+		Date horaVoo;
 		int passouDoLimite = 0;
 
-		for (int i=0; i < tamComps; i++) {
-			for (int j=0; j < comps[i].getTamListVoo(); j++) {
+		for (Companhia c : listComp) {
+			for (Voo v : c.getListVoo()) {
 				//Data do atual do sistema == data do voo
-				if ((formData.format(dataAtual)) == (comps[i].listVoo[j].getDataVoo())) {
-					//Horario do voo 
+				horaVoo = v.getHorarioVoo();
+				if ((horaVoo.before(horaAtual)) && (horaVoo.after(hora30Depois))) {
+					passouDoLimite++; 
 				}
-				comps[i].listVoo[j].getDataVoo()
-				comps[i].listVoo[j].getHorarioVoo()
-				formData.format(dataAtual);
-				formHora.format(dataAtual);
-
 			}
 		}
-		return passouDoLimite;
+		if(passouDoLimite > 3)
+			return true;	
+		return false;
 	}
 	
 	//Listar os passageiros do voo pelo numero do voo
 	public String listPsgPorNumVoo(int numVoo) {
 		String dadosPsgs = "";
 
-		Companhia[] comps = getCompanhia();
-
-		for (int i=0; i < getTamListComp(); i++) {
-			for (int j=0; j < comps[i].getTamListVoo(); j++) {
-				if(comps[i].listVoo[j].getNumVoo() == numVoo) {
-					for (int k=0; k < comps[i].listVoo[j].getQntdePsg(); k++) {
-						dadosPsgs += "\n\n" + listaPsg[k].imprime();
+		for (Companhia c : listComp) {
+			for (Voo v : c.getListVoo()) {
+				if(v.getNumVoo() == numVoo) {
+					for (Passageiro p : v.getListPsg()) {
+						dadosPsgs += "\n\n" + p.imprime();
 					}
 					break;
 				}
@@ -146,5 +149,4 @@ import java.text.SimpleDateFormat;
 		}
 		return dadosPsgs;
 	}
-	*/
  }

@@ -2,8 +2,8 @@ package mainPackage;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-//import java.util.Arrays;
 import java.util.Date;
+import java.util.regex.*;
 
 public class Companhia {
 	
@@ -20,7 +20,6 @@ public class Companhia {
 		this.listVoo = new ArrayList<Voo>();
 		this.listAviao = new ArrayList<Aviao>();
 		this.qntdeVoo = 0;
-
 	}
 
 	public String getNome() {
@@ -34,14 +33,20 @@ public class Companhia {
 		return listVoo;
 	}
 	public void setListVoo(ArrayList<Voo> listVoo) {
-		this.listVoo = new ArrayList<Voo>(listVoo);
+		if(listVoo == null)
+			this.listVoo = new ArrayList<Voo>(listVoo);
+		else
+			this.listVoo = listVoo;
 	}
 
 	public ArrayList<Aviao> getListAviao() {
 		return listAviao;
 	}
 	public void setListAviao(ArrayList<Aviao> listAviao) {
-		this.listAviao = new ArrayList<Aviao>(listAviao);
+		if(listAviao == null)
+			this.listAviao = new ArrayList<Aviao>(listAviao);
+		else
+			this.listAviao = listAviao;
 	}
 
 	// Retorna um Voo da lista
@@ -72,7 +77,7 @@ public class Companhia {
 		}
 
 	// Cadastra o aviao da Companhia Aerea
-	public void cadastrarAviao(Double autonomiaVoo, Double altura, Double enverAsa, Double comprimento, Double capacCarga) {
+	public void cadastrarAviao(String modelo, Double autonomiaVoo, Double altura, Double enverAsa, Double comprimento, Double capacCarga) {
 		// Adiciona o novo aviao a lista de avioes
 
 		Aviao a = new Aviao();
@@ -93,8 +98,8 @@ public class Companhia {
 	}
 
 	// Cadastra os voo's da Companhia Aerea
-	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Aviao aviao, Date dataVoo, 
-		Date horarioVoo, String statusVoo, String destino, String origem, ArrayList<Passageiro> listaPsg, int qntdePsg) {	
+	public void cadastrarVoo(String infoVoo, int numVoo, String compAerea, Date dataVoo, 
+		Date horarioVoo, String statusVoo, String destino, String origem) {	
 		Voo voo = new Voo();
 		// Adiciona o novo voo a lista de voo's
 
@@ -102,13 +107,13 @@ public class Companhia {
 		voo.setInfoVoo(infoVoo);
 		voo.setNumVoo(numVoo);
 		voo.setCompAerea(compAerea);
-		voo.setAviao(aviao);
 		voo.setDataVoo(dataVoo);
+		voo.setAviao(null);
 		voo.setHorarioVoo(horarioVoo);
 		voo.setStatusVoo(statusVoo);
 		voo.setDestino(destino);
 		voo.setOrigem(origem);
-		voo.setListPsg(listaPsg);
+		voo.setListPsg(null);
 		
 		this.listVoo.add(voo);
 
@@ -146,5 +151,17 @@ public class Companhia {
 
 	public void setQntdeVoo(int qntdeVoo) {
 		this.qntdeVoo = qntdeVoo;
+	}
+	
+	public boolean validarCpf(String cpf) {
+        Pattern pat = Pattern.compile ("/^[0-9]{3}.?[0-9]{3}.?[0-9]{3}-?[0-9]{2}/");
+        Matcher mat = pat.matcher (cpf);
+        return mat.find();       
+	}
+	
+	public boolean validarEmail(String email) {
+        Pattern pat = Pattern.compile ("^[a-zA-Z0-9_\\.-]+@([a-zA-Z0-9]\\.)*([a-zA-Z0-9])*\\.");
+        Matcher mat = pat.matcher (email);
+        return mat.find();       
 	}
 }

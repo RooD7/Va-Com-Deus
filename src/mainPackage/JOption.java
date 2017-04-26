@@ -7,6 +7,10 @@ import javax.swing.*;
 
 public class JOption {
 
+	public void showJOptionResultado(String titulo, String result) {
+		JOptionPane.showMessageDialog(null, result, titulo, JOptionPane.PLAIN_MESSAGE);
+	}
+	
 	public void showJOptionAviao(Aviao aviao) {
 		JOptionPane.showMessageDialog(null, aviao.imprime(), "Aviao", JOptionPane.PLAIN_MESSAGE);
 	}
